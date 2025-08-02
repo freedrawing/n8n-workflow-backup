@@ -554,10 +554,7 @@
       "parameters": {
         "rule": {
           "interval": [
-            {
-              "expression": "0 15 15 * * *",
-              "field": "cronExpression"
-            }
+            {}
           ]
         }
       },
