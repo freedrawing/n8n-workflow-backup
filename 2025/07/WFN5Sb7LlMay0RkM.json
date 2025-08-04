@@ -752,7 +752,7 @@
           "parse_mode": "HTML"
         },
         "chatId": "5111438653",
-        "text": "=✅ {{ $('n8n').item.json.name }} 동기화 완료."
+        "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
       },
       "position": [
         1152,
