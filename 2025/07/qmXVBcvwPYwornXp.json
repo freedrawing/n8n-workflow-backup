@@ -6,7 +6,7 @@
         [
           {
             "index": 0,
-            "node": "답변 보내기",
+            "node": "field formatting",
             "type": "main"
           }
         ]
@@ -23,12 +23,34 @@
         ]
       ]
     },
-    "If (텍스트만 필터링)": {
+    "If": {
       "main": [
         [
           {
             "index": 0,
-            "node": "AI Agent",
+            "node": "field formatting1",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "답변 보내기",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "If",
             "type": "main"
           }
         ]
@@ -50,7 +72,103 @@
         [
           {
             "index": 0,
-            "node": "If (텍스트만 필터링)",
+            "node": "명언 추가 필터링",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "field formatting": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Merge",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "field formatting1": {
+      "main": [
+        [
+          {
+            "index": 1,
+            "node": "Merge",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "if 챗봇에게 메시지를 보내는 거면": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "AI Agent",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "내가 보낸 건 제외",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "내가 보낸 건 제외": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Message a model",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "답변 보내기": {
+      "main": [
+        []
+      ]
+    },
+    "명언 추가 필터링": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "트리거 접두사 제거",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "챗봇에게 하는 메시지인지 확인",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "챗봇에게 하는 메시지인지 확인": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "if 챗봇에게 메시지를 보내는 거면",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "트리거 접두사 제거": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "명언(Quotes) 추가",
             "type": "main"
           }
         ]
@@ -59,7 +177,7 @@
   },
   "id": "qmXVBcvwPYwornXp",
   "isArchived": false,
-  "name": "텔레그램 AI 챗봇 연동",
+  "name": "텔레그램 챗봇 꾸러미",
   "nodes": [
     {
       "credentials": {
@@ -72,7 +190,7 @@
       "name": "Telegram Trigger",
       "parameters": {
         "additionalFields": {
-          "chatIds": "5111438653",
+          "chatIds": "-4891878660, 5111438653, -1002508804174",
           "download": false
         },
         "updates": [
@@ -80,33 +198,214 @@
         ]
       },
       "position": [
-        -576,
-        -208
+        -720,
+        -320
       ],
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "webhookId": "a596c835-1bf5-4ef4-8c81-09522539602a"
     },
     {
-      "id": "3209136b-2fda-4a9c-9deb-1c6980c9b4a6",
-      "name": "If (텍스트만 필터링)",
+      "id": "38888bce-2d85-4479-952b-b39119e3ba8e",
+      "name": "AI Agent",
+      "parameters": {
+        "options": {},
+        "promptType": "define",
+        "text": "=질문: {{ $json.text }}\n___\n\n위 질문에 대한 답변을 제공해줘. 답변에 여타 시작 문구 혹은 마무리 문구 같은 거 추가하지 말고 오로지 질문에 대한 답변만 제공해줘? 뭐 이를테면, '정말 좋은 질문이에요. 답변을 드릴게요.' <- 이런 필요 없는 표현은 섞지 말라는 의미야. 그리고 텔레그램으로 보낼 거니까 텔레그램 마크다운이나 HTML 문법 때문에 메세지 송신이 안 되는 일은 없게 해줘."
+      },
+      "position": [
+        160,
+        -480
+      ],
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "googlePalmApi": {
+          "id": "V1AoxYk9nDVwiywA",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "id": "ea7395e9-be36-45e1-9784-6924ddf21b56",
+      "name": "Google Gemini Chat Model",
+      "parameters": {
+        "options": {}
+      },
+      "position": [
+        160,
+        -320
+      ],
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1
+    },
+    {
+      "credentials": {
+        "telegramApi": {
+          "id": "ejLmvh6eni9woYLp",
+          "name": "Telegram account"
+        }
+      },
+      "id": "f2c19967-a3ba-4dca-b462-45ae5d1a32e8",
+      "name": "답변 보내기",
+      "parameters": {
+        "additionalFields": {
+          "appendAttribution": false
+        },
+        "chatId": "={{ $('챗봇에게 하는 메시지인지 확인').item.json.chat_id }}",
+        "text": "={{ $json.text }}"
+      },
+      "position": [
+        1408,
+        -288
+      ],
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "webhookId": "083e8e23-1e57-4dcb-88f8-8bf06cdee134"
+    },
+    {
+      "credentials": {
+        "redis": {
+          "id": "wUQMer6jnoB9wK9u",
+          "name": "Redis account"
+        }
+      },
+      "id": "bd758f81-bf95-48cc-8115-b550fb460869",
+      "name": "Redis Chat Memory",
+      "parameters": {
+        "contextWindowLength": 10,
+        "sessionIdType": "customKey",
+        "sessionKey": "={{'telegram_session_' + $json.chat_id}}"
+      },
+      "position": [
+        304,
+        -256
+      ],
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "106cc41a-8452-49cf-897e-8314d49a48e6",
+      "name": "챗봇에게 하는 메시지인지 확인",
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst msg = item.json.message;\nconst text = msg?.text;\nconst chatId = msg?.chat?.id;\nconst username = msg?.chat?.username;\n\nif (!text || !chatId) {\n  return {};\n}\n\nconst isAsk = text.startsWith('/ask');\nconst cleanedText = isAsk ? text.replace(/^\\/ask\\s*/, '') : text;\n\nreturn {\n  json: {\n    username: username,\n    text: cleanedText,\n    chat_id: chatId,\n    is_ask: isAsk\n  }\n};\n"
+      },
+      "position": [
+        -368,
+        -304
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "e4ff98d3-7eb0-486e-a7e6-a197ffe9583f",
+      "name": "명언 추가 필터링",
+      "parameters": {
+        "conditions": {
+          "combinator": "or",
+          "conditions": [
+            {
+              "id": "910f8433-fbc7-4dbd-b9cf-aa53de66885a",
+              "leftValue": "={{$json.message.text}}",
+              "operator": {
+                "operation": "contains",
+                "type": "string"
+              },
+              "rightValue": "/명언"
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        -544,
+        -320
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "id": "mLiW4HU9dBk6AOm0",
+          "name": "Postgres account"
+        }
+      },
+      "id": "05b12bec-cdce-4c4e-8a04-ec237058dd2f",
+      "name": "명언(Quotes) 추가",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {},
+        "query": "insert into quotes (content, author) values ('{{$json.cleanedText}}', null);"
+      },
+      "position": [
+        -16,
+        -640
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6
+    },
+    {
+      "id": "c0b41045-1f8d-4e96-8c6f-0094c3aae405",
+      "name": "트리거 접두사 제거",
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/명언' 등 여러 접두사를 제거\n  const cleanedText = text.replace(/^\\/(quotes|명언)\\s*/, '').trim();\n\n  item.json.cleanedText = cleanedText;\n}\n\nreturn $input.all();\n"
+      },
+      "position": [
+        -288,
+        -496
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "googlePalmApi": {
+          "id": "V1AoxYk9nDVwiywA",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "id": "c3cee79b-5bd7-4ae8-9424-933a4c494c0d",
+      "name": "Message a model",
+      "parameters": {
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.text }}에 '뭐하냐'는 같은 표현이 있으면 알려줘. 이를테면 '뭐하니', '머하냐', '머해' '뭐해' 같은 형태는 달라도 의미가 유사하면 말이야.\n\n만약 메시지에 '뭐하냐'는 의미의 텍스트가 있으면 `true`, 아니라면 `false`만 정확히 응답해 줘. 반드시 `true` 또는 `false`만 리턴할 것!!"
+            }
+          ]
+        },
+        "modelId": {
+          "__rl": true,
+          "cachedResultName": "models/gemini-2.5-flash",
+          "mode": "list",
+          "value": "models/gemini-2.5-flash"
+        },
+        "options": {}
+      },
+      "position": [
+        240,
+        -64
+      ],
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1
+    },
+    {
+      "id": "c20d4aa6-6225-4907-bd49-83e485689be8",
+      "name": "if 챗봇에게 메시지를 보내는 거면",
       "parameters": {
         "conditions": {
           "combinator": "and",
           "conditions": [
             {
-              "id": "b6af28b4-21af-40c9-a1f2-85cd1dc950fe",
-              "leftValue": "={{ $json.message.text ? true : false }}",
-              "operator": {
-                "operation": "notEmpty",
-                "singleValue": true,
-                "type": "boolean"
-              },
-              "rightValue": "true"
-            },
-            {
-              "id": "e9d0d14c-a7a2-4651-a383-4e292297ef98",
-              "leftValue": "={{ $json.message.text.startsWith('/ask') }}",
+              "id": "5ff490ab-91a0-44ac-bad8-8a28ae2ed99d",
+              "leftValue": "={{ $json.is_ask }}",
               "operator": {
                 "operation": "true",
                 "singleValue": true,
@@ -125,90 +424,134 @@
         "options": {}
       },
       "position": [
-        -384,
-        -208
+        -176,
+        -304
       ],
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2
     },
     {
-      "id": "38888bce-2d85-4479-952b-b39119e3ba8e",
-      "name": "AI Agent",
+      "id": "882bb947-2303-44c5-99b4-1c16e71de97b",
+      "name": "If",
       "parameters": {
-        "options": {},
-        "promptType": "define",
-        "text": "=질문: {{ $json.message.text }}\n___\n\n위 질문에 대한 답변을 제공해줘. 답변에 여타 시작 문구 혹은 마무리 문구 같은 거 추가하지 말고 오로지 질문에 대한 답변만 제공해줘? 뭐 이를테면, '정말 좋은 질문이에요. 답변을 드릴게요.' <- 이런 필요 없는 표현은 섞지 말라는 의미야. 그리고 텔레그램으로 보낼 거니까 텔레그램 마크다운이나 HTML 문법 때문에 메세지 송신이 안 되는 일은 없게 해줘."
-      },
-      "position": [
-        -176,
-        -224
-      ],
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2
-    },
-    {
-      "credentials": {
-        "googlePalmApi": {
-          "id": "V1AoxYk9nDVwiywA",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      },
-      "id": "ea7395e9-be36-45e1-9784-6924ddf21b56",
-      "name": "Google Gemini Chat Model",
-      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "1a0e6189-bb76-4a3e-b997-0a011bc58d94",
+              "leftValue": "={{ $json.content.parts[0].text }}",
+              "operator": {
+                "operation": "contains",
+                "type": "string"
+              },
+              "rightValue": "true"
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          }
+        },
         "options": {}
       },
       "position": [
-        -384,
-        64
+        608,
+        -16
       ],
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2
     },
     {
-      "credentials": {
-        "telegramApi": {
-          "id": "ejLmvh6eni9woYLp",
-          "name": "Telegram account"
-        }
-      },
-      "id": "f2c19967-a3ba-4dca-b462-45ae5d1a32e8",
-      "name": "답변 보내기",
+      "id": "dc048eb9-7dfc-48c0-8189-f513eeda5313",
+      "name": "Merge",
+      "parameters": {},
+      "position": [
+        1136,
+        -288
+      ],
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2
+    },
+    {
+      "id": "0e44a449-49a4-47ed-8436-32938495c6c7",
+      "name": "field formatting",
       "parameters": {
-        "additionalFields": {
-          "appendAttribution": false
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a5a6ca52-93b5-4225-917f-752a1b8b1039",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $json.output }}"
+            }
+          ]
         },
-        "chatId": "5111438653",
-        "text": "={{ $json.output }}"
+        "options": {}
       },
       "position": [
-        224,
-        -224
+        608,
+        -416
       ],
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "webhookId": "083e8e23-1e57-4dcb-88f8-8bf06cdee134"
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4
     },
     {
-      "credentials": {
-        "redis": {
-          "id": "wUQMer6jnoB9wK9u",
-          "name": "Redis account"
-        }
-      },
-      "id": "bd758f81-bf95-48cc-8115-b550fb460869",
-      "name": "Redis Chat Memory",
+      "id": "e33bd5c5-b5c4-4f2a-9a15-f201ad6126ba",
+      "name": "field formatting1",
       "parameters": {
-        "contextWindowLength": 10,
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ 'telegram_session_' + $json.message.chat.id }}"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5161134b-920c-4200-8df2-fcd5597fecb0",
+              "name": "text",
+              "type": "string",
+              "value": "우리 주인님께서는 뭐하냐는 질문을 받고 싶어하지 않으십니다!! 주의해 주세요!"
+            }
+          ]
+        },
+        "options": {}
       },
       "position": [
-        -224,
-        80
+        832,
+        -32
       ],
-      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
-      "typeVersion": 1.5
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4
+    },
+    {
+      "id": "adb8afb8-f3f5-4342-a13a-9e9d997ea8c5",
+      "name": "내가 보낸 건 제외",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "f718b6e9-7220-420b-b2af-ae85f63ff94d",
+              "leftValue": "={{ $('명언 추가 필터링').item.json.message.from.username }}",
+              "operator": {
+                "operation": "notContains",
+                "type": "string"
+              },
+              "rightValue": "realSeongUkKang"
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        16,
+        -176
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2
     }
   ],
   "repo_name": "n8n-workflow-backup",
