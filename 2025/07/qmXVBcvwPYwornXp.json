@@ -1,35 +1,13 @@
 {
   "active": true,
   "connections": {
-    "Telegram Trigger": {
-      "main": [
-        [
-          {
-            "node": "If (텍스트만 필터링)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If (텍스트만 필터링)": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "AI Agent": {
       "main": [
         [
           {
+            "index": 0,
             "node": "답변 보내기",
-            "type": "main",
-            "index": 0
+            "type": "main"
           }
         ]
       ]
@@ -38,9 +16,20 @@
       "ai_languageModel": [
         [
           {
+            "index": 0,
             "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
+            "type": "ai_languageModel"
+          }
+        ]
+      ]
+    },
+    "If (텍스트만 필터링)": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "AI Agent",
+            "type": "main"
           }
         ]
       ]
@@ -49,182 +38,185 @@
       "ai_memory": [
         [
           {
+            "index": 0,
             "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
+            "type": "ai_memory"
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "If (텍스트만 필터링)",
+            "type": "main"
           }
         ]
       ]
     }
   },
-  "createdAt": "2025-07-21T03:09:27.400Z",
   "id": "qmXVBcvwPYwornXp",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
   "name": "텔레그램 AI 챗봇 연동",
   "nodes": [
     {
-      "parameters": {
-        "updates": [
-          "message"
-        ],
-        "additionalFields": {
-          "download": false,
-          "chatIds": "-4891878660"
-        }
-      },
-      "type": "n8n-nodes-base.telegramTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -580,
-        -200
-      ],
-      "id": "d06028ca-9a54-4aaa-b451-161f81870e5b",
-      "name": "Telegram Trigger",
-      "webhookId": "a596c835-1bf5-4ef4-8c81-09522539602a",
       "credentials": {
         "telegramApi": {
           "id": "ejLmvh6eni9woYLp",
           "name": "Telegram account"
         }
-      }
+      },
+      "id": "d06028ca-9a54-4aaa-b451-161f81870e5b",
+      "name": "Telegram Trigger",
+      "parameters": {
+        "additionalFields": {
+          "chatIds": "5111438653",
+          "download": false
+        },
+        "updates": [
+          "message"
+        ]
+      },
+      "position": [
+        -576,
+        -208
+      ],
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "webhookId": "a596c835-1bf5-4ef4-8c81-09522539602a"
     },
     {
+      "id": "3209136b-2fda-4a9c-9deb-1c6980c9b4a6",
+      "name": "If (텍스트만 필터링)",
       "parameters": {
         "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "b6af28b4-21af-40c9-a1f2-85cd1dc950fe",
+              "leftValue": "={{ $json.message.text ? true : false }}",
+              "operator": {
+                "operation": "notEmpty",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": "true"
+            },
+            {
+              "id": "e9d0d14c-a7a2-4651-a383-4e292297ef98",
+              "leftValue": "={{ $json.message.text.startsWith('/ask') }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
           "options": {
             "caseSensitive": true,
             "leftValue": "",
             "typeValidation": "strict",
             "version": 2
-          },
-          "conditions": [
-            {
-              "id": "b6af28b4-21af-40c9-a1f2-85cd1dc950fe",
-              "leftValue": "={{ $json.message.text ? true : false }}",
-              "rightValue": "true",
-              "operator": {
-                "type": "boolean",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            },
-            {
-              "id": "e9d0d14c-a7a2-4651-a383-4e292297ef98",
-              "leftValue": "={{ $json.message.text.startsWith('/ask') }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
+          }
         },
         "options": {}
       },
+      "position": [
+        -384,
+        -208
+      ],
       "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -380,
-        -200
-      ],
-      "id": "3209136b-2fda-4a9c-9deb-1c6980c9b4a6",
-      "name": "If (텍스트만 필터링)"
+      "typeVersion": 2.2
     },
     {
-      "parameters": {
-        "promptType": "define",
-        "text": "=질문: {{ $json.message.text }}\n___\n\n위 질문에 대한 답변을 제공해줘. 답변에 여타 시작 문구 혹은 마무리 문구 같은 거 추가하지 말고 오로지 질문에 대한 답변만 제공해줘? 뭐 이를테면, '정말 좋은 질문이에요. 답변을 드릴게요.' <- 이런 필요 없는 표현은 섞지 말라는 의미야. 그리고 텔레그램으로 보낼 거니까 텔레그램 마크다운이나 HTML 문법 때문에 메세지 송신이 안 되는 일은 없게 해줘.",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        -180,
-        -220
-      ],
       "id": "38888bce-2d85-4479-952b-b39119e3ba8e",
-      "name": "AI Agent"
+      "name": "AI Agent",
+      "parameters": {
+        "options": {},
+        "promptType": "define",
+        "text": "=질문: {{ $json.message.text }}\n___\n\n위 질문에 대한 답변을 제공해줘. 답변에 여타 시작 문구 혹은 마무리 문구 같은 거 추가하지 말고 오로지 질문에 대한 답변만 제공해줘? 뭐 이를테면, '정말 좋은 질문이에요. 답변을 드릴게요.' <- 이런 필요 없는 표현은 섞지 말라는 의미야. 그리고 텔레그램으로 보낼 거니까 텔레그램 마크다운이나 HTML 문법 때문에 메세지 송신이 안 되는 일은 없게 해줘."
+      },
+      "position": [
+        -176,
+        -224
+      ],
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2
     },
     {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        -380,
-        60
-      ],
-      "id": "ea7395e9-be36-45e1-9784-6924ddf21b56",
-      "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
           "id": "V1AoxYk9nDVwiywA",
           "name": "Google Gemini(PaLM) Api account"
         }
-      }
+      },
+      "id": "ea7395e9-be36-45e1-9784-6924ddf21b56",
+      "name": "Google Gemini Chat Model",
+      "parameters": {
+        "options": {}
+      },
+      "position": [
+        -384,
+        64
+      ],
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1
     },
     {
-      "parameters": {
-        "chatId": "-4891878660",
-        "text": "={{ $json.output }}",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        220,
-        -220
-      ],
-      "id": "f2c19967-a3ba-4dca-b462-45ae5d1a32e8",
-      "name": "답변 보내기",
-      "webhookId": "083e8e23-1e57-4dcb-88f8-8bf06cdee134",
       "credentials": {
         "telegramApi": {
           "id": "ejLmvh6eni9woYLp",
           "name": "Telegram account"
         }
-      }
+      },
+      "id": "f2c19967-a3ba-4dca-b462-45ae5d1a32e8",
+      "name": "답변 보내기",
+      "parameters": {
+        "additionalFields": {
+          "appendAttribution": false
+        },
+        "chatId": "5111438653",
+        "text": "={{ $json.output }}"
+      },
+      "position": [
+        224,
+        -224
+      ],
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "webhookId": "083e8e23-1e57-4dcb-88f8-8bf06cdee134"
     },
     {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ 'telegram_session_' + $json.message.chat.id }}",
-        "contextWindowLength": 10
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
-      "typeVersion": 1.5,
-      "position": [
-        -220,
-        80
-      ],
-      "id": "bd758f81-bf95-48cc-8115-b550fb460869",
-      "name": "Redis Chat Memory",
       "credentials": {
         "redis": {
           "id": "wUQMer6jnoB9wK9u",
           "name": "Redis account"
         }
-      }
+      },
+      "id": "bd758f81-bf95-48cc-8115-b550fb460869",
+      "name": "Redis Chat Memory",
+      "parameters": {
+        "contextWindowLength": 10,
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ 'telegram_session_' + $json.message.chat.id }}"
+      },
+      "position": [
+        -224,
+        80
+      ],
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5
     }
   ],
-  "pinData": {},
   "repo_name": "n8n-workflow-backup",
   "repo_owner": "freedrawing",
   "repo_path": "https://github.com/freedrawing/n8n-workflow-backup.git",
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2025-07-27T04:21:33.065Z",
-  "versionId": "5caad1ed-eccb-41ca-8b6a-0f5a41a73383"
+  "triggerCount": 1
 }
