@@ -195,14 +195,14 @@
               "id": "9fff486b-5148-405b-8e51-bbdcd5d2638d",
               "name": "message",
               "type": "string",
-              "value": "=🔥 오늘의 명언 🔥\n\n{{$json.content}}\n\n                                                          -{{$json.author ? $json.author : \"작자미상\"}}-"
+              "value": "=🔥 오늘의 명언 🔥\n\n{{$json.content}}"
             }
           ]
         },
         "options": {}
       },
       "position": [
-        96,
+        128,
         80
       ],
       "type": "n8n-nodes-base.set",
