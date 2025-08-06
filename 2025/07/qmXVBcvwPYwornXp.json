@@ -371,6 +371,7 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       },
+      "disabled": true,
       "id": "c3cee79b-5bd7-4ae8-9424-933a4c494c0d",
       "name": "Message a model",
       "parameters": {
@@ -431,6 +432,7 @@
       "typeVersion": 2.2
     },
     {
+      "disabled": true,
       "id": "882bb947-2303-44c5-99b4-1c16e71de97b",
       "name": "If",
       "parameters": {
@@ -498,6 +500,7 @@
       "typeVersion": 3.4
     },
     {
+      "disabled": true,
       "id": "e33bd5c5-b5c4-4f2a-9a15-f201ad6126ba",
       "name": "field formatting1",
       "parameters": {
@@ -521,6 +524,7 @@
       "typeVersion": 3.4
     },
     {
+      "disabled": true,
       "id": "adb8afb8-f3f5-4342-a13a-9e9d997ea8c5",
       "name": "내가 보낸 건 제외",
       "parameters": {
