@@ -222,7 +222,7 @@
       },
       "position": [
         160,
-        -320
+        -288
       ],
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1
@@ -244,8 +244,8 @@
         "text": "={{ $json.text }}"
       },
       "position": [
-        928,
-        -384
+        816,
+        -400
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -482,8 +482,8 @@
         "options": {}
       },
       "position": [
-        608,
-        -416
+        528,
+        -480
       ],
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4
