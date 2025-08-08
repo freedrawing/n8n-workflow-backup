@@ -378,7 +378,7 @@
       },
       "position": [
         -640,
-        -496
+        -512
       ],
       "type": "@vicenterusso/n8n-nodes-redis-enhanced.redisEnhanced",
       "typeVersion": 1
