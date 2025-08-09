@@ -554,10 +554,7 @@
       "parameters": {
         "rule": {
           "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 12
-            }
+            {}
           ]
         }
       },
