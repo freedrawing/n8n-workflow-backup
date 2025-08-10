@@ -619,6 +619,7 @@
       "typeVersion": 1.2
     },
     {
+      "disabled": true,
       "id": "c87b7a10-7833-4e22-9ad3-e592128664a9",
       "name": "BNL Law (미국 진출 기업, 스타트업 기업들을 위한 법률 가이드)",
       "parameters": {
