@@ -68,6 +68,7 @@
           "name": "Telegram account"
         }
       },
+      "disabled": true,
       "id": "95226c60-1c16-4e94-80fe-bf25f81ca012",
       "name": "개인 채팅방 보내기",
       "parameters": {
