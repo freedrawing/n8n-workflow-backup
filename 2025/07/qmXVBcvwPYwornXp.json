@@ -1,7 +1,7 @@
 {
   "active": true,
   "connections": {
-    "'강성욱'이 한 채팅 제외": {
+    "'강성욱'씨가 한 채팅 제외": {
       "main": [
         [
           {
@@ -34,6 +34,17 @@
         ]
       ]
     },
+    "Formatting": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Store chat data",
+            "type": "main"
+          }
+        ]
+      ]
+    },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
@@ -55,7 +66,7 @@
           },
           {
             "index": 0,
-            "node": "Store chat data",
+            "node": "Formatting",
             "type": "main"
           }
         ],
@@ -118,7 +129,7 @@
         [
           {
             "index": 0,
-            "node": "'강성욱'이 한 채팅 제외",
+            "node": "'강성욱'씨가 한 채팅 제외",
             "type": "main"
           }
         ]
@@ -204,7 +215,7 @@
         ]
       },
       "position": [
-        -960,
+        -880,
         -320
       ],
       "type": "n8n-nodes-base.telegramTrigger",
@@ -220,7 +231,7 @@
         "text": "=질문: {{ $json.text }}\n___\n\n위 질문에 대한 답변을 제공해줘. 답변에 여타 시작 문구 혹은 마무리 문구 같은 거 추가하지 말고 오로지 질문에 대한 답변만 제공해줘? 뭐 이를테면, '정말 좋은 질문이에요. 답변을 드릴게요.' <- 이런 필요 없는 표현은 섞지 말라는 의미야. 그리고 텔레그램으로 보낼 거니까 텔레그램 마크다운이나 HTML 문법 때문에 메세지 송신이 안 되는 일은 없게 해줘."
       },
       "position": [
-        176,
+        384,
         -496
       ],
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -239,7 +250,7 @@
         "options": {}
       },
       "position": [
-        176,
+        384,
         -304
       ],
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
@@ -262,7 +273,7 @@
         "text": "={{ $json.text }}"
       },
       "position": [
-        1024,
+        1232,
         -400
       ],
       "type": "n8n-nodes-base.telegram",
@@ -284,7 +295,7 @@
         "sessionKey": "={{'telegram_session_' + $json.chat_id}}"
       },
       "position": [
-        304,
+        512,
         -304
       ],
       "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
@@ -297,7 +308,7 @@
         "jsCode": "const item = $input.first();\nconst msg = item.json.message;\nconst text = msg?.text;\nconst chatId = msg?.chat?.id;\nconst username = msg?.chat?.username;\n\nif (!text || !chatId) {\n  return {};\n}\n\nconst isAsk = text.startsWith('/ask');\nconst cleanedText = isAsk ? text.replace(/^\\/ask\\s*/, '') : text;\n\nreturn {\n  json: {\n    username: username,\n    text: cleanedText,\n    chat_id: chatId,\n    is_ask: isAsk\n  }\n};\n"
       },
       "position": [
-        -368,
+        -160,
         -304
       ],
       "type": "n8n-nodes-base.code",
@@ -330,7 +341,7 @@
         "options": {}
       },
       "position": [
-        -544,
+        -336,
         -320
       ],
       "type": "n8n-nodes-base.if",
@@ -351,7 +362,7 @@
         "query": "insert into quotes (content, author) values ('{{$json.cleanedText}}', null);"
       },
       "position": [
-        -16,
+        192,
         -640
       ],
       "type": "n8n-nodes-base.postgres",
@@ -364,7 +375,7 @@
         "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/명언' 등 여러 접두사를 제거\n  const cleanedText = text.replace(/^\\/(quotes|명언)\\s*/, '').trim();\n\n  item.json.cleanedText = cleanedText;\n}\n\nreturn $input.all();\n"
       },
       "position": [
-        -288,
+        -80,
         -496
       ],
       "type": "n8n-nodes-base.code",
@@ -398,7 +409,7 @@
         "options": {}
       },
       "position": [
-        -176,
+        32,
         -304
       ],
       "type": "n8n-nodes-base.if",
@@ -421,7 +432,7 @@
         "options": {}
       },
       "position": [
-        544,
+        752,
         -496
       ],
       "type": "n8n-nodes-base.set",
@@ -431,16 +442,21 @@
       "id": "b2706fe3-7ac8-4826-8985-47dffcc67a76",
       "name": "Store chat data",
       "parameters": {
-        "jsonBody": "={\n  \"message_id\": {{$json.message.message_id}},\n  \"chat_id\": {{$json.message.chat.id}},\n  \"is_bot\": {{$json.message.from.is_bot}},\n  \"nickname\": \"{{$json.message.from.first_name || ''}}\",\n  \"username\": \"{{$json.message.chat.username || ''}}\",\n  \"text\": \"{{$json.message.text || ''}}\",\n  \"timestamp\": {{$json.message.date}}\n}\n",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n  \"message_id\": {{ $json.message_id }},\n  \"chat_id\": {{ $json.chat_id}},\n  \"is_bot\": {{$json.is_bot}},\n  \"nickname\": \"{{$json.first_name || ''}}\",\n  \"username\": \"{{$json.username || ''}}\",\n  \"text\": {{ $json.text }},\n  \"timestamp\": {{$json.timestamp}}\n}\n",
         "method": "POST",
         "options": {},
         "sendBody": true,
-        "specifyBody": "json",
+        "specifyBody": "=json",
         "url": "http://chatting-embedding:5001/embed"
       },
       "position": [
-        -592,
-        -128
+        -208,
+        -96
       ],
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2
@@ -449,7 +465,7 @@
       "id": "18450b1f-df90-4512-8de7-f291ef1abe4f",
       "name": "Ask to 'what_are_you_doing' label",
       "parameters": {
-        "jsonBody": "={\n  \"label\": \"what_are_you_doing\",\n  \"text\": \"{{ $json.text }}\"\n} ",
+        "jsonBody": "={\n  \"label\": \"what_are_you_doing\",\n  \"text\": \"{{$json.text.replace(/\"/g, '\\\\\"').replace(/\\n/g, '\\\\n')}}\"\n} ",
         "method": "POST",
         "options": {},
         "sendBody": true,
@@ -457,7 +473,7 @@
         "url": "http://chatting-embedding:5001/seed-matches"
       },
       "position": [
-        320,
+        528,
         -80
       ],
       "type": "n8n-nodes-base.httpRequest",
@@ -491,7 +507,7 @@
         "options": {}
       },
       "position": [
-        -800,
+        -704,
         -320
       ],
       "type": "n8n-nodes-base.if",
@@ -525,7 +541,7 @@
         "options": {}
       },
       "position": [
-        480,
+        688,
         -80
       ],
       "type": "n8n-nodes-base.if",
@@ -548,15 +564,28 @@
         "options": {}
       },
       "position": [
-        688,
+        896,
         -176
       ],
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4
     },
     {
+      "id": "3adbfa7b-3126-449b-95aa-9040d6ef6615",
+      "name": "Formatting",
+      "parameters": {
+        "jsCode": "const obj = $input.first().json;\n\nreturn [\n  {\n    json: {\n      message_id: obj.message.message_id,\n      chat_id: obj.message.chat.id,\n      is_bot: obj.message.from.is_bot,\n      nickname: obj.message.from.first_name || '',\n      username: obj.message.chat.username || '',\n      text: JSON.stringify(obj.message.text),\n      timestamp: obj.message.date\n    }\n  }\n];"
+      },
+      "position": [
+        -432,
+        -96
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
       "id": "3430cb47-94c1-43c9-92d3-f3f19660bc70",
-      "name": "'강성욱'이 한 채팅 제외",
+      "name": "'강성욱'씨가 한 채팅 제외",
       "parameters": {
         "conditions": {
           "combinator": "or",
@@ -572,7 +601,7 @@
             },
             {
               "id": "8ca488e6-807f-4132-82ca-b46a52b0ce23",
-              "leftValue": "={{ $json.username }}",
+              "leftValue": "={{ $('명언 추가 필터링').item.json.message.from.username }}",
               "operator": {
                 "operation": "notEquals",
                 "type": "string"
@@ -590,7 +619,7 @@
         "options": {}
       },
       "position": [
-        64,
+        272,
         -160
       ],
       "type": "n8n-nodes-base.if",
