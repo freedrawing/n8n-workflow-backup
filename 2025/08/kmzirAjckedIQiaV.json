@@ -106,7 +106,8 @@
       "name": "개인 채팅방 보내기",
       "parameters": {
         "additionalFields": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "parse_mode": "HTML"
         },
         "chatId": "={{ $json.chatId }}",
         "text": "={{ $json.message }}"
