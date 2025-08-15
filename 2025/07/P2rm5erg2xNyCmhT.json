@@ -255,7 +255,7 @@
           "appendAttribution": false,
           "parse_mode": "HTML"
         },
-        "chatId": "-4891878660",
+        "chatId": "-1002759947428",
         "text": "=<strong>🆕🆕🆕  새 글이 올라왔어요! 🆕🆕🆕</strong>\n<a href=\"{{$json.safeLink}}\"> {{ $json.safeTitle }} by {{$json.author}}</a>\n\n({{ $json.pubDate }})"
       },
       "position": [
