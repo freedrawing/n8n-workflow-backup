@@ -86,6 +86,17 @@
         ]
       ]
     },
+    "Steady Study 배휘동님": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Common filter",
+            "type": "main"
+          }
+        ]
+      ]
+    },
     "bok filter": {
       "main": [
         [
@@ -333,7 +344,7 @@
       "id": "250e4acd-196e-4bbd-bd63-3279970b3e20",
       "name": "Common filter",
       "parameters": {
-        "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\nconst author = $json.author;\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\nconst author = $json.author || $json.creator;\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
       },
       "position": [
         -1088,
@@ -503,7 +514,7 @@
           "appendAttribution": false,
           "parse_mode": "HTML"
         },
-        "chatId": "-4891878660",
+        "chatId": "-1002759947428",
         "text": "=<strong>🆕🆕🆕  새 글이 올라왔어요! 🆕🆕🆕</strong>\n<a href=\"{{$json.link}}\"> {{ $json.title }} by {{$json.author}}</a>\n\n({{ $json.pubDate }})"
       },
       "position": [
@@ -744,6 +755,26 @@
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
+    },
+    {
+      "id": "bb599ba9-2626-4f1f-b4a9-da1df42ecd7b",
+      "name": "Steady Study 배휘동님",
+      "parameters": {
+        "feedUrl": "https://www.stdy.blog/rss/",
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        }
+      },
+      "position": [
+        -1504,
+        880
+      ],
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1
     }
   ],
   "repo_name": "n8n-workflow-backup",
@@ -753,5 +784,5 @@
     "executionOrder": "v1"
   },
   "tags": [],
-  "triggerCount": 7
+  "triggerCount": 8
 }
