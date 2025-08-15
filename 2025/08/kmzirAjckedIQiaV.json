@@ -177,7 +177,7 @@
       "id": "66b6ee71-dd38-4683-aa0a-c430e314221c",
       "name": "ChatRoom Formatting",
       "parameters": {
-        "jsCode": "return [\n  // {\n  //   json: {\n  //     chatRoom: \"태웅이방\",\n  //     chatId: -4891878660,\n  //     message: $input.first().json.message\n  //   }\n  // },\n  // {\n  //   json: {\n  //     chatRoom: \"삼강일회\",\n  //     chatId: -1002508804174,\n  //     message: $input.first().json.message\n  //   }\n  // },\n  {\n    json: {\n      chatRoom: \"개인방\",\n      chatId: 5111438653,\n      message: $input.first().json.message\n    }\n  }\n];\n"
+        "jsCode": "return [\n  // {\n  //   json: {\n  //     chatRoom: \"태웅이방\",\n  //     chatId: -1002759947428,\n  //     message: $input.first().json.message\n  //   }\n  // },\n  // {\n  //   json: {\n  //     chatRoom: \"삼강일회\",\n  //     chatId: -1002508804174,\n  //     message: $input.first().json.message\n  //   }\n  // },\n  {\n    json: {\n      chatRoom: \"개인방\",\n      chatId: 5111438653,\n      message: $input.first().json.message\n    }\n  }\n];\n"
       },
       "position": [
         304,
