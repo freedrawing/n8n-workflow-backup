@@ -207,7 +207,7 @@
       "name": "Telegram Trigger",
       "parameters": {
         "additionalFields": {
-          "chatIds": "-1002508804174, -4891878660, 5111438653",
+          "chatIds": "-1002508804174, -1002759947428, 5111438653",
           "download": false
         },
         "updates": [
