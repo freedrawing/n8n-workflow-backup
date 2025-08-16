@@ -132,7 +132,7 @@
       "parameters": {
         "operation": "executeQuery",
         "options": {},
-        "query": "SELECT content, author FROM quotes ORDER BY RANDOM() LIMIT 1;"
+        "query": "SELECT content, SOURCE FROM knowledge_bits ORDER BY RANDOM() LIMIT 1;"
       },
       "position": [
         -64,
@@ -148,7 +148,8 @@
         "rule": {
           "interval": [
             {
-              "triggerAtHour": 9
+              "field": "hours",
+              "hoursInterval": 4
             }
           ]
         }
