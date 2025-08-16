@@ -63,11 +63,6 @@
             "index": 0,
             "node": "명언 추가 필터링",
             "type": "main"
-          },
-          {
-            "index": 0,
-            "node": "Formatting",
-            "type": "main"
           }
         ],
         []
@@ -153,6 +148,11 @@
           {
             "index": 0,
             "node": "챗봇에게 하는 메시지인지 확인",
+            "type": "main"
+          },
+          {
+            "index": 0,
+            "node": "Formatting",
             "type": "main"
           }
         ]
@@ -308,8 +308,8 @@
         "jsCode": "const item = $input.first();\nconst msg = item.json.message;\nconst text = msg?.text;\nconst chatId = msg?.chat?.id;\nconst username = msg?.chat?.username;\n\nif (!text || !chatId) {\n  return {};\n}\n\nconst isAsk = text.startsWith('/ask');\nconst cleanedText = isAsk ? text.replace(/^\\/ask\\s*/, '') : text;\n\nreturn {\n  json: {\n    username: username,\n    text: cleanedText,\n    chat_id: chatId,\n    is_ask: isAsk\n  }\n};\n"
       },
       "position": [
-        -160,
-        -304
+        -192,
+        -320
       ],
       "type": "n8n-nodes-base.code",
       "typeVersion": 2
@@ -328,7 +328,7 @@
                 "operation": "contains",
                 "type": "string"
               },
-              "rightValue": "/명언"
+              "rightValue": "/노트"
             }
           ],
           "options": {
@@ -341,8 +341,8 @@
         "options": {}
       },
       "position": [
-        -336,
-        -320
+        -480,
+        -336
       ],
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2
@@ -359,7 +359,7 @@
       "parameters": {
         "operation": "executeQuery",
         "options": {},
-        "query": "insert into quotes (content, author) values ('{{$json.cleanedText}}', null);"
+        "query": "insert into knowledge_bits (content, SOURCE) values ('{{$json.cleanedText}}', null);"
       },
       "position": [
         192,
@@ -372,7 +372,7 @@
       "id": "c0b41045-1f8d-4e96-8c6f-0094c3aae405",
       "name": "트리거 접두사 제거",
       "parameters": {
-        "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/명언' 등 여러 접두사를 제거\n  const cleanedText = text.replace(/^\\/(quotes|명언)\\s*/, '').trim();\n\n  item.json.cleanedText = cleanedText;\n}\n\nreturn $input.all();\n"
+        "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/명언' 등 여러 접두사를 제거\n  const cleanedText = text.replace(/^\\/(quotes|노트)\\s*/, '').trim();\n\n  item.json.cleanedText = cleanedText;\n}\n\nreturn $input.all();\n"
       },
       "position": [
         -80,
@@ -409,8 +409,8 @@
         "options": {}
       },
       "position": [
-        32,
-        -304
+        -32,
+        -320
       ],
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2
@@ -455,7 +455,7 @@
         "url": "http://chatting-embedding:5001/embed"
       },
       "position": [
-        -208,
+        0,
         -96
       ],
       "type": "n8n-nodes-base.httpRequest",
@@ -577,7 +577,7 @@
         "jsCode": "const obj = $input.first().json;\n\nreturn [\n  {\n    json: {\n      message_id: obj.message.message_id,\n      chat_id: obj.message.chat.id,\n      is_bot: obj.message.from.is_bot,\n      nickname: obj.message.from.first_name || '',\n      username: obj.message.chat.username || '',\n      text: JSON.stringify(obj.message.text),\n      timestamp: obj.message.date\n    }\n  }\n];"
       },
       "position": [
-        -432,
+        -192,
         -96
       ],
       "type": "n8n-nodes-base.code",
