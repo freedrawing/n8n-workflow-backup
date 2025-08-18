@@ -197,7 +197,7 @@
               "id": "9fff486b-5148-405b-8e51-bbdcd5d2638d",
               "name": "message",
               "type": "string",
-              "value": "=🔥 오늘의 명언 🔥\n\n{{$json.content}}"
+              "value": "=🔥 인사이트 한 조각 🔥\n\n{{$json.content}}"
             }
           ]
         },
