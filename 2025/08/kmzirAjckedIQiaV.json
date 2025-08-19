@@ -149,7 +149,7 @@
           "interval": [
             {
               "field": "hours",
-              "hoursInterval": 4
+              "hoursInterval": 6
             }
           ]
         }
