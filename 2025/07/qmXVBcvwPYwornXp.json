@@ -160,13 +160,7 @@
     },
     "봇 응답": {
       "main": [
-        [
-          {
-            "index": 0,
-            "node": "답변 보내기",
-            "type": "main"
-          }
-        ]
+        []
       ]
     },
     "챗봇에게 하는 메시지인지 확인": {
@@ -372,7 +366,7 @@
       "id": "c0b41045-1f8d-4e96-8c6f-0094c3aae405",
       "name": "트리거 접두사 제거",
       "parameters": {
-        "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/명언' 등 여러 접두사를 제거\n  const cleanedText = text.replace(/^\\/(quotes|노트)\\s*/, '').trim();\n\n  item.json.cleanedText = cleanedText;\n}\n\nreturn $input.all();\n"
+        "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/노트' 등 접두사 제거\n  const cleanedText = text.replace(/^\\/(quotes|노트)\\s*/, '').trim();\n\n  // Postgres escape 처리 (작은따옴표를 '' 로)\n  const escapedText = cleanedText.replace(/'/g, \"''\");\n\n  item.json.cleanedText = escapedText;\n}\n\nreturn $input.all();\n"
       },
       "position": [
         -80,
@@ -462,6 +456,7 @@
       "typeVersion": 4.2
     },
     {
+      "disabled": true,
       "id": "18450b1f-df90-4512-8de7-f291ef1abe4f",
       "name": "Ask to 'what_are_you_doing' label",
       "parameters": {
@@ -514,6 +509,7 @@
       "typeVersion": 2.2
     },
     {
+      "disabled": true,
       "id": "0be6cc3c-ae06-4f8f-a31c-545513297449",
       "name": "if 'what_are_you_doing' is true",
       "parameters": {
@@ -548,6 +544,7 @@
       "typeVersion": 2.2
     },
     {
+      "disabled": true,
       "id": "3623cd09-44ad-411e-861b-b17a405bad42",
       "name": "봇 응답",
       "parameters": {
@@ -584,6 +581,7 @@
       "typeVersion": 2
     },
     {
+      "disabled": true,
       "id": "3430cb47-94c1-43c9-92d3-f3f19660bc70",
       "name": "'강성욱'씨가 한 채팅 제외",
       "parameters": {
