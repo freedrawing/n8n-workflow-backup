@@ -161,6 +161,17 @@
         ]
       ]
     },
+    "씨앗노래": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Common filter",
+            "type": "main"
+          }
+        ]
+      ]
+    },
     "유시민씨 것만 필터링": {
       "main": [
         [
@@ -775,6 +786,26 @@
       ],
       "type": "n8n-nodes-base.rssFeedReadTrigger",
       "typeVersion": 1
+    },
+    {
+      "id": "351ecb40-109c-497e-968b-74b9513fca29",
+      "name": "씨앗노래",
+      "parameters": {
+        "feedUrl": "https://seedsong.pe.kr/feed",
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        }
+      },
+      "position": [
+        -1520,
+        1056
+      ],
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1
     }
   ],
   "repo_name": "n8n-workflow-backup",
@@ -784,5 +815,5 @@
     "executionOrder": "v1"
   },
   "tags": [],
-  "triggerCount": 8
+  "triggerCount": 9
 }
