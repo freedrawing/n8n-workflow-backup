@@ -270,8 +270,8 @@
         "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\n\n// author 처리 (없을 경우 기본값)\nlet author = $json.author;\nif (!author || author === 'noreply@blogger.com (Unknown)') {\n  author = '송종식의 IT와 가치투자 이야기';\n}\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
       },
       "position": [
-        -1120,
-        208
+        -1136,
+        224
       ],
       "type": "n8n-nodes-base.code",
       "typeVersion": 2
@@ -677,8 +677,8 @@
         }
       },
       "position": [
-        -1168,
-        -576
+        -1136,
+        -592
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
@@ -726,6 +726,7 @@
       "typeVersion": 1.2
     },
     {
+      "disabled": true,
       "id": "75843841-619a-4a01-ac06-139b1436a94c",
       "name": "Test",
       "parameters": {
@@ -768,6 +769,7 @@
       "typeVersion": 1.2
     },
     {
+      "disabled": true,
       "id": "bb599ba9-2626-4f1f-b4a9-da1df42ecd7b",
       "name": "Steady Study 배휘동님",
       "parameters": {
@@ -815,5 +817,5 @@
     "executionOrder": "v1"
   },
   "tags": [],
-  "triggerCount": 9
+  "triggerCount": 8
 }
