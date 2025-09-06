@@ -147,7 +147,10 @@
       "parameters": {
         "rule": {
           "interval": [
-            {}
+            {
+              "triggerAtHour": 6,
+              "triggerAtMinute": 30
+            }
           ]
         }
       },
