@@ -1,0 +1,16 @@
+{
+  "active": false,
+  "connections": {},
+  "id": "BnvxwCPaM2xBXP13",
+  "isArchived": true,
+  "name": "Email fowarding",
+  "nodes": [],
+  "repo_name": "n8n-workflow-backup",
+  "repo_owner": "freedrawing",
+  "repo_path": "https://github.com/freedrawing/n8n-workflow-backup.git",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [],
+  "triggerCount": 0
+}
