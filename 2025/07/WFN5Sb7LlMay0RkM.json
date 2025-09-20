@@ -104,6 +104,24 @@
         ]
       ]
     },
+    "Execute Workflow1": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Loop Over Items1",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Flows 실패1",
+            "type": "main"
+          }
+        ]
+      ]
+    },
     "File is different": {
       "main": [
         [
@@ -132,6 +150,17 @@
           {
             "index": 0,
             "node": "Loop Over Items",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Flows 실패1": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Loop Over Items1",
             "type": "main"
           }
         ]
@@ -190,6 +219,24 @@
           {
             "index": 0,
             "node": "Execute Workflow",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "동기화 완료 알림1",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Execute Workflow1",
             "type": "main"
           }
         ]
@@ -724,7 +771,7 @@
           "parse_mode": "HTML"
         },
         "chatId": "5111438653",
-        "text": "=🔄 워크플로우 동기화를 시작합니다! [{{ $execution.id }}]"
+        "text": "=🔄 워크플로우 동기화를 시작합니다!"
       },
       "position": [
         528,
@@ -817,6 +864,89 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
       "webhookId": "80d20816-deb4-4824-8152-93a29f709fc5"
+    },
+    {
+      "credentials": {
+        "telegramApi": {
+          "id": "ejLmvh6eni9woYLp",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true,
+      "id": "03b09659-af60-4ce7-a65e-76e63fd2d7bd",
+      "name": "Flows 실패1",
+      "parameters": {
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        },
+        "chatId": "5111438653",
+        "text": "=:x: Failed to backup {{ $('Loop Over Items1').item.json.id }}"
+      },
+      "position": [
+        1440,
+        -336
+      ],
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "webhookId": "99af6d42-48fd-4438-88dd-9797e7a3c0b2"
+    },
+    {
+      "credentials": {
+        "telegramApi": {
+          "id": "ejLmvh6eni9woYLp",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true,
+      "id": "721f2f4d-a080-4023-af29-ad27ca9187fc",
+      "name": "동기화 완료 알림1",
+      "parameters": {
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        },
+        "chatId": "5111438653",
+        "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
+      },
+      "position": [
+        1200,
+        -496
+      ],
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "webhookId": "99af6d42-48fd-4438-88dd-9797e7a3c0b2"
+    },
+    {
+      "disabled": true,
+      "id": "e9633892-1a7b-4231-b208-c2c5769d8f75",
+      "name": "Execute Workflow1",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "mode": "each",
+        "options": {},
+        "workflowId": "={{ $workflow.id }}"
+      },
+      "position": [
+        1200,
+        -352
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1
+    },
+    {
+      "disabled": true,
+      "id": "6f6cab04-818f-4ae3-8774-9d182950fc63",
+      "name": "Loop Over Items1",
+      "parameters": {
+        "options": {}
+      },
+      "position": [
+        976,
+        -368
+      ],
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3
     }
   ],
   "repo_name": "n8n-workflow-backup",
