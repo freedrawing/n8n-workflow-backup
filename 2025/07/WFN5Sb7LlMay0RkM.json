@@ -87,7 +87,7 @@
         [
           {
             "index": 0,
-            "node": "Flows 실패",
+            "node": "Collect success / fail message",
             "type": "main"
           }
         ]
@@ -146,13 +146,7 @@
     },
     "Flows 실패": {
       "main": [
-        [
-          {
-            "index": 0,
-            "node": "Loop Over Items",
-            "type": "main"
-          }
-        ]
+        []
       ]
     },
     "Flows 실패1": {
@@ -208,13 +202,7 @@
     },
     "Loop Over Items": {
       "main": [
-        [
-          {
-            "index": 0,
-            "node": "동기화 완료 알림",
-            "type": "main"
-          }
-        ],
+        [],
         [
           {
             "index": 0,
@@ -653,22 +641,6 @@
       "typeVersion": 1
     },
     {
-      "id": "67b51278-509b-47fc-a526-72f181ee6b84",
-      "name": "Sticky Note2",
-      "parameters": {
-        "color": 7,
-        "content": "## Main workflow loop",
-        "height": 416.1856906618075,
-        "width": 1272.6408145680155
-      },
-      "position": [
-        288,
-        -112
-      ],
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1
-    },
-    {
       "id": "d3211ae7-fa5a-470f-8f9c-65c817162dfa",
       "name": "Execute Workflow",
       "onError": "continueErrorOutput",
@@ -799,33 +771,8 @@
         "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
       },
       "position": [
-        1152,
-        -64
-      ],
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "webhookId": "99af6d42-48fd-4438-88dd-9797e7a3c0b2"
-    },
-    {
-      "credentials": {
-        "telegramApi": {
-          "id": "ejLmvh6eni9woYLp",
-          "name": "Telegram account"
-        }
-      },
-      "id": "e669329a-dc0e-40b7-b270-47b7cc0adeed",
-      "name": "Flows 실패",
-      "parameters": {
-        "additionalFields": {
-          "appendAttribution": false,
-          "parse_mode": "HTML"
-        },
-        "chatId": "5111438653",
-        "text": "=:x: Failed to backup {{ $('Loop Over Items').item.json.id }}"
-      },
-      "position": [
-        1392,
-        96
+        1920,
+        176
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -884,8 +831,8 @@
         "text": "=:x: Failed to backup {{ $('Loop Over Items1').item.json.id }}"
       },
       "position": [
-        1440,
-        -336
+        1600,
+        -416
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -910,8 +857,8 @@
         "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
       },
       "position": [
-        1200,
-        -496
+        1360,
+        -576
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -928,8 +875,8 @@
         "workflowId": "={{ $workflow.id }}"
       },
       "position": [
-        1200,
-        -352
+        1360,
+        -432
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1
@@ -942,11 +889,65 @@
         "options": {}
       },
       "position": [
-        976,
-        -368
+        1136,
+        -448
       ],
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3
+    },
+    {
+      "credentials": {
+        "telegramApi": {
+          "id": "ejLmvh6eni9woYLp",
+          "name": "Telegram account"
+        }
+      },
+      "id": "e669329a-dc0e-40b7-b270-47b7cc0adeed",
+      "name": "Flows 실패",
+      "parameters": {
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        },
+        "chatId": "5111438653",
+        "text": "=:x: Failed to backup {{ $('Loop Over Items').item.json.id }}"
+      },
+      "position": [
+        1968,
+        16
+      ],
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "webhookId": "99af6d42-48fd-4438-88dd-9797e7a3c0b2"
+    },
+    {
+      "id": "9e6bd5f8-20e3-43cf-bd89-f63e660dcf4c",
+      "name": "Collect success / fail message",
+      "parameters": {
+        "jsCode": "// 모든 입력 아이템을 수집\nconst results = [];\nlet successCount = 0;\nlet errorCount = 0;\n\nfor (const item of $input.all()) {\n  if (item.json.success) {\n    results.push(`✅ ${item.json.name || item.json.workflow}: 성공`);\n    successCount++;\n  } else {\n    results.push(`❌ ${item.json.name || item.json.workflow}: 실패`);\n    errorCount++;\n  }\n}\n\n// 통합 메시지 생성\nconst summary = `워크플로우 실행 완료\\n성공: ${successCount}, 실패: ${errorCount}\\n\\n`;\nconst details = results.join('\\n');\n\nreturn [{\n  json: {\n    message: summary + details,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "position": [
+        1392,
+        96
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "67b51278-509b-47fc-a526-72f181ee6b84",
+      "name": "Sticky Note2",
+      "parameters": {
+        "color": 7,
+        "content": "## Main workflow loop",
+        "height": 416.1856906618075,
+        "width": 1272.6408145680155
+      },
+      "position": [
+        288,
+        -112
+      ],
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1
     }
   ],
   "repo_name": "n8n-workflow-backup",
