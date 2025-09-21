@@ -26,6 +26,17 @@
         ]
       ]
     },
+    "Collect success / fail message": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "동기화 완료 알림",
+            "type": "main"
+          }
+        ]
+      ]
+    },
     "Config": {
       "main": [
         [
@@ -202,7 +213,13 @@
     },
     "Loop Over Items": {
       "main": [
-        [],
+        [
+          {
+            "index": 0,
+            "node": "Collect success / fail message",
+            "type": "main"
+          }
+        ],
         [
           {
             "index": 0,
@@ -771,8 +788,8 @@
         "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
       },
       "position": [
-        1920,
-        176
+        1648,
+        96
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -924,11 +941,11 @@
       "id": "9e6bd5f8-20e3-43cf-bd89-f63e660dcf4c",
       "name": "Collect success / fail message",
       "parameters": {
-        "jsCode": "// 모든 입력 아이템을 수집\nconst results = [];\nlet successCount = 0;\nlet errorCount = 0;\n\nfor (const item of $input.all()) {\n  if (item.json.success) {\n    results.push(`✅ ${item.json.name || item.json.workflow}: 성공`);\n    successCount++;\n  } else {\n    results.push(`❌ ${item.json.name || item.json.workflow}: 실패`);\n    errorCount++;\n  }\n}\n\n// 통합 메시지 생성\nconst summary = `워크플로우 실행 완료\\n성공: ${successCount}, 실패: ${errorCount}\\n\\n`;\nconst details = results.join('\\n');\n\nreturn [{\n  json: {\n    message: summary + details,\n    timestamp: new Date().toISOString()\n  }\n}];"
+        "jsCode": "// 모든 입력 아이템을 수집\nconst results = [];\nlet successCount = 0;\nlet errorCount = 0;\n\nfor (const item of $input.all()) {\n  if ($input.first().json.Done) {\n    // ✅ '{{ $('n8n').item.json.name }}' 동기화 완료.\n    results.push(`✅ ${('n8n').item.json.name || item.json.workflow}: 성공`);\n    successCount++;\n  } else {\n    results.push(`❌ ${item.json.name || item.json.workflow}: 실패`);\n    errorCount++;\n  }\n}\n\n// 통합 메시지 생성\nconst summary = `워크플로우 실행 완료\\n성공: ${successCount}, 실패: ${errorCount}\\n\\n`;\nconst details = results.join('\\n');\n\nreturn [{\n  json: {\n    message: summary + details,\n    timestamp: new Date().toISOString()\n  }\n}];"
       },
       "position": [
-        1392,
-        96
+        1424,
+        64
       ],
       "type": "n8n-nodes-base.code",
       "typeVersion": 2
