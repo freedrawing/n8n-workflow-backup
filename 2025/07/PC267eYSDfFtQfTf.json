@@ -235,7 +235,7 @@
   },
   "id": "PC267eYSDfFtQfTf",
   "isArchived": false,
-  "name": "RSS alert 스케줄러",
+  "name": "RSS 트래킹 스케줄러",
   "nodes": [
     {
       "id": "0664ed86-ebb1-4e0b-88b9-2a0e4a90904e",
@@ -525,7 +525,7 @@
           "appendAttribution": false,
           "parse_mode": "HTML"
         },
-        "chatId": "-1002759947428",
+        "chatId": "5111438653",
         "text": "=<strong>🆕🆕🆕  새 글이 올라왔어요! 🆕🆕🆕</strong>\n<a href=\"{{$json.link}}\"> {{ $json.title }} by {{$json.author}}</a>\n\n({{ $json.pubDate }})"
       },
       "position": [
@@ -606,6 +606,7 @@
         "workflowId": {
           "__rl": true,
           "cachedResultName": "RSS watcher module",
+          "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
           "mode": "list",
           "value": "P2rm5erg2xNyCmhT"
         },
@@ -691,6 +692,7 @@
         "workflowId": {
           "__rl": true,
           "cachedResultName": "RSS watcher module",
+          "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
           "mode": "list",
           "value": "P2rm5erg2xNyCmhT"
         },
@@ -816,6 +818,13 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "projectId": "lpLK8rDKIwFmdM1V",
+      "role": "workflow:owner",
+      "workflowId": "PC267eYSDfFtQfTf"
+    }
+  ],
   "tags": [],
   "triggerCount": 8
 }
