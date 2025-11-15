@@ -743,7 +743,7 @@
           "parse_mode": "HTML"
         },
         "chatId": "5111438653",
-        "text": "=🔄 워크플로우 동기화를 시작합니다!\n\n▶ {{ $json.message }}"
+        "text": "=🔄 워크플로우 동기화를 시작합니다!\n\n{{ $json.message }}"
       },
       "position": [
         1440,
@@ -899,7 +899,7 @@
       "id": "9e6bd5f8-20e3-43cf-bd89-f63e660dcf4c",
       "name": "Collect success / fail message",
       "parameters": {
-        "jsCode": "// 모든 루프 실행 결과가 $input.all()에 담겨있음\nconst results = [];\nlet successCount = 0;\nlet errorCount = 0;\n\nfor (const item of $('n8n').all()) {\n  // Execute Workflow의 실행 결과 확인\n  const workflowName = item.json.name || '알 수 없는 워크플로우';\n  \n  // error 필드가 있으면 실패, 없으면 성공\n  if (item.json.error) {\n    results.push(`❌ ${workflowName}: 실패`);\n    errorCount++;\n  } else {\n    results.push(`✅ ${workflowName}: 성공`);\n    successCount++;\n  }\n}\n\n// 통합 메시지 생성\nconst summary = `성공: ${successCount}, 실패: ${errorCount}\\n\\n`;\nconst details = results.join('\\n');\n\nreturn [{\n  json: {\n    message: summary + details,\n    timestamp: new Date().toISOString()\n  }\n}];"
+        "jsCode": "// 모든 루프 실행 결과가 $input.all()에 담겨있음\nconst results = [];\nlet successCount = 0;\nlet errorCount = 0;\n\nfor (const item of $('n8n').all()) {\n  // Execute Workflow의 실행 결과 확인\n  const workflowName = item.json.name || '알 수 없는 워크플로우';\n  \n  // error 필드가 있으면 실패, 없으면 성공\n  if (item.json.error) {\n    results.push(`❌ ${workflowName}: 실패`);\n    errorCount++;\n  } else {\n    results.push(`✅ ${workflowName}: 성공`);\n    successCount++;\n  }\n}\n\n// 통합 메시지 생성\nconst summary = `✅️ 성공: ${successCount}, ❌ 실패: ${errorCount}\\n\\n`;\nconst details = results.join('\\n');\n\nreturn [{\n  json: {\n    message: summary + details,\n    timestamp: new Date().toISOString()\n  }\n}];"
       },
       "position": [
         1232,
