@@ -217,6 +217,13 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "projectId": "lpLK8rDKIwFmdM1V",
+      "role": "workflow:owner",
+      "workflowId": "kmzirAjckedIQiaV"
+    }
+  ],
   "tags": [],
   "triggerCount": 1
 }
