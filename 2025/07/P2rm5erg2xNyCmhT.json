@@ -159,7 +159,7 @@
   },
   "id": "P2rm5erg2xNyCmhT",
   "isArchived": false,
-  "name": "RSS watcher module",
+  "name": "RSS 서브 모듈",
   "nodes": [
     {
       "alwaysOutputData": true,
@@ -255,7 +255,7 @@
           "appendAttribution": false,
           "parse_mode": "HTML"
         },
-        "chatId": "-1002759947428",
+        "chatId": "5111438653",
         "text": "=<strong>🆕🆕🆕  새 글이 올라왔어요! 🆕🆕🆕</strong>\n<a href=\"{{$json.safeLink}}\"> {{ $json.safeTitle }} by {{$json.author}}</a>\n\n({{ $json.pubDate }})"
       },
       "position": [
@@ -275,11 +275,7 @@
       },
       "id": "ea38a9e2-121b-42e3-a0d0-affd9a093525",
       "name": "Update new SortedSet",
-      "parameters": {
-        "operation": "zadd",
-        "scoreMembers": "={{ $json.score }} {{ $json.value }}",
-        "sortedSet": "={{$json[\"key\"].replace(/\\s+/g, \"_\")}}"
-      },
+      "parameters": {},
       "position": [
         528,
         -640
@@ -370,12 +366,7 @@
       },
       "id": "96582172-b3ac-4f3a-b34c-99ed5bc536af",
       "name": "Get stored articles",
-      "parameters": {
-        "args": "0 -1",
-        "keys": "=rss:blog:{{$json[\"author\"].replace(/\\s+/g, \"_\")}}",
-        "operation": "eval",
-        "script": "-- KEYS[1] = sorted set key\n-- ARGV[1] = start index\n-- ARGV[2] = stop index\n-- return redis.call('ZREVRANGE', KEYS[1], ARGV[1], ARGV[2], 'WITHSCORES')\nreturn redis.call('ZREVRANGE', KEYS[1], ARGV[1], ARGV[2])"
-      },
+      "parameters": {},
       "position": [
         -640,
         -512
@@ -390,6 +381,13 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "projectId": "lpLK8rDKIwFmdM1V",
+      "role": "workflow:owner",
+      "workflowId": "P2rm5erg2xNyCmhT"
+    }
+  ],
   "tags": [],
   "triggerCount": 0
 }
