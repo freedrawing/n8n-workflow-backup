@@ -419,7 +419,7 @@
       },
       "position": [
         528,
-        432
+        416
       ],
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2
@@ -788,8 +788,8 @@
         "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
       },
       "position": [
-        1648,
-        96
+        1616,
+        64
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -848,8 +848,8 @@
         "text": "=:x: Failed to backup {{ $('Loop Over Items1').item.json.id }}"
       },
       "position": [
-        1600,
-        -416
+        1296,
+        -512
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -874,8 +874,8 @@
         "text": "=✅ '{{ $('n8n').item.json.name }}' 동기화 완료."
       },
       "position": [
-        1360,
-        -576
+        1056,
+        -672
       ],
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -892,8 +892,8 @@
         "workflowId": "={{ $workflow.id }}"
       },
       "position": [
-        1360,
-        -432
+        1056,
+        -528
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1
@@ -906,8 +906,8 @@
         "options": {}
       },
       "position": [
-        1136,
-        -448
+        832,
+        -544
       ],
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3
@@ -973,6 +973,13 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "projectId": "lpLK8rDKIwFmdM1V",
+      "role": "workflow:owner",
+      "workflowId": "WFN5Sb7LlMay0RkM"
+    }
+  ],
   "tags": [],
   "triggerCount": 1
 }
