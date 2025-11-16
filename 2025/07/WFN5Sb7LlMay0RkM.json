@@ -923,32 +923,6 @@
       ],
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1
-    },
-    {
-      "credentials": {
-        "anthropicApi": {
-          "id": "Kzm7k8Mt2FDuBMZj",
-          "name": "Anthropic account"
-        }
-      },
-      "disabled": true,
-      "id": "618afaac-c3fb-40a9-ae8c-3cb7a5529956",
-      "name": "Analyze document",
-      "parameters": {
-        "modelId": {
-          "__rl": true,
-          "mode": "list",
-          "value": ""
-        },
-        "options": {},
-        "resource": "document"
-      },
-      "position": [
-        2096,
-        256
-      ],
-      "type": "@n8n/n8n-nodes-langchain.anthropic",
-      "typeVersion": 1
     }
   ],
   "repo_name": "n8n-workflow-backup",
