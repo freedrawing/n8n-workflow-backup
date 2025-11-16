@@ -182,7 +182,7 @@
       "id": "053f1d63-f011-439b-bc6c-4ee8a7d738ad",
       "name": "Get author",
       "parameters": {
-        "jsCode": "const author = $input.first().json.author || $input.first().json.creator;\n\nreturn [\n  {\n    json: {\n      author: author\n    }\n  }\n];"
+        "jsCode": "const author = $input.first().json.author || $input.first().json.creator;\n\nreturn [\n  {\n    json: {\n      author: `rss:blog:${author}`\n    }\n  }\n];"
       },
       "position": [
         -848,
@@ -208,7 +208,7 @@
       "id": "bf9073a9-f31b-4e74-84c9-905ac70542aa",
       "name": "Check duplication",
       "parameters": {
-        "jsCode": "const all = $input.all();\nconst stored = all[0].json.result;  // Redis ZSET 값\nconst latest = all[1].json.latestArticles;           // RSS 10개\n\n// Set으로 빠르게 검색\nconst storedSet = new Set(stored);\n\nconst newPosts = latest.filter(article => storedSet.has(article.json.guid) == false);\n\n// 새로운 글 + 최신 글 다음 노드로 전달\nreturn [\n  {\n    json: {\n      newPosts,\n      latest\n    }\n  }\n];\n\n"
+        "jsCode": "const all = $input.all();\nconst stored = all[0].json.result;  // Redis ZSET 값\nconst latest = all[1].json.latestArticles; // RSS 10개\n\n// Set으로 빠르게 검색\nconst storedSet = new Set(stored);\n\nconst newPosts = latest.filter(article => storedSet.has(article.json.guid) == false);\n\n// 새로운 글 + 최신 글 다음 노드로 전달\nreturn [\n  {\n    json: {\n      newPosts,\n      latest\n    }\n  }\n];\n\n"
       },
       "position": [
         -288,
@@ -275,7 +275,11 @@
       },
       "id": "ea38a9e2-121b-42e3-a0d0-affd9a093525",
       "name": "Update new SortedSet",
-      "parameters": {},
+      "parameters": {
+        "operation": "zadd",
+        "scoreMembers": "={{ $json.score }} {{ $json.value }}",
+        "sortedSet": "={{ $json.key }}"
+      },
       "position": [
         528,
         -640
@@ -366,7 +370,10 @@
       },
       "id": "96582172-b3ac-4f3a-b34c-99ed5bc536af",
       "name": "Get stored articles",
-      "parameters": {},
+      "parameters": {
+        "operation": "zrange",
+        "sortedSet": "={{ $json.author }}"
+      },
       "position": [
         -640,
         -512
