@@ -319,10 +319,19 @@
               "id": "910f8433-fbc7-4dbd-b9cf-aa53de66885a",
               "leftValue": "={{$json.message.text}}",
               "operator": {
-                "operation": "contains",
+                "operation": "startsWith",
                 "type": "string"
               },
               "rightValue": "/노트"
+            },
+            {
+              "id": "2fc2037b-231e-4bd7-910a-3f606a6a5672",
+              "leftValue": "={{$json.message.text}}",
+              "operator": {
+                "operation": "startsWith",
+                "type": "string"
+              },
+              "rightValue": "/note"
             }
           ],
           "options": {
