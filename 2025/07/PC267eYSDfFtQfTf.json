@@ -563,7 +563,8 @@
         "options": {},
         "workflowId": {
           "__rl": true,
-          "cachedResultName": "RSS watcher module",
+          "cachedResultName": "RSS 서브 모듈",
+          "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
           "mode": "list",
           "value": "P2rm5erg2xNyCmhT"
         },
