@@ -1,5 +1,220 @@
 {
   "active": true,
+  "activeVersion": {
+    "authors": "system migration",
+    "connections": {
+      "ChatRoom Formatting": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Loop Over Items",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Execute a SQL query": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Message Formatting",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "index": 0,
+              "node": "개인 채팅방 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Message Formatting": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "ChatRoom Formatting",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Execute a SQL query",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Execute a SQL query",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "개인 채팅방 보내기": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Loop Over Items",
+              "type": "main"
+            }
+          ]
+        ]
+      }
+    },
+    "description": null,
+    "name": null,
+    "nodes": [
+      {
+        "id": "ee3ab107-5b8a-4b84-a273-3915493da814",
+        "name": "When clicking ‘Execute workflow’",
+        "parameters": {},
+        "position": [
+          -320,
+          32
+        ],
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1
+      },
+      {
+        "credentials": {
+          "telegramApi": {
+            "id": "ejLmvh6eni9woYLp",
+            "name": "Telegram account"
+          }
+        },
+        "id": "5b95c889-08ca-4755-92f1-f7adf43abb04",
+        "name": "개인 채팅방 보내기",
+        "parameters": {
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          },
+          "chatId": "={{ $json.chatId }}",
+          "text": "={{ $json.message }}"
+        },
+        "position": [
+          768,
+          96
+        ],
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "webhookId": "99af6d42-48fd-4438-88dd-9797e7a3c0b2"
+      },
+      {
+        "credentials": {
+          "postgres": {
+            "id": "mLiW4HU9dBk6AOm0",
+            "name": "Postgres account"
+          }
+        },
+        "id": "414221fa-e5b4-495e-b83c-aa413a6b7e77",
+        "name": "Execute a SQL query",
+        "parameters": {
+          "operation": "executeQuery",
+          "options": {},
+          "query": "SELECT content, SOURCE FROM knowledge_bits ORDER BY RANDOM() LIMIT 1;"
+        },
+        "position": [
+          -64,
+          80
+        ],
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6
+      },
+      {
+        "id": "8bb27ebe-b893-4477-8fa1-0ab091c48200",
+        "name": "Schedule Trigger",
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 6,
+                "triggerAtMinute": 30
+              }
+            ]
+          }
+        },
+        "position": [
+          -320,
+          176
+        ],
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2
+      },
+      {
+        "id": "458422e7-1691-4557-831f-e2c92016207d",
+        "name": "Loop Over Items",
+        "parameters": {
+          "options": {}
+        },
+        "position": [
+          528,
+          80
+        ],
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3
+      },
+      {
+        "id": "66b6ee71-dd38-4683-aa0a-c430e314221c",
+        "name": "ChatRoom Formatting",
+        "parameters": {
+          "jsCode": "return [\n  // {\n  //   json: {\n  //     chatRoom: \"태웅이방\",\n  //     chatId: -1002759947428,\n  //     message: $input.first().json.message\n  //   }\n  // },\n  // {\n  //   json: {\n  //     chatRoom: \"삼강일회\",\n  //     chatId: -1002508804174,\n  //     message: $input.first().json.message\n  //   }\n  // },\n  {\n    json: {\n      chatRoom: \"개인방\",\n      chatId: 5111438653,\n      message: $input.first().json.message\n    }\n  }\n];\n"
+        },
+        "position": [
+          304,
+          80
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "e2465cb7-f997-4ca6-95a9-5a9374c1b9f2",
+        "name": "Message Formatting",
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "9fff486b-5148-405b-8e51-bbdcd5d2638d",
+                "name": "message",
+                "type": "string",
+                "value": "=🔥 인사이트 한 조각 🔥\n\n{{$json.content}}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "position": [
+          128,
+          80
+        ],
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4
+      }
+    ],
+    "workflowId": "kmzirAjckedIQiaV"
+  },
+  "activeVersionId": "4ce713fd-48e0-4b62-aedc-78b45e00e7ca",
   "connections": {
     "ChatRoom Formatting": {
       "main": [
