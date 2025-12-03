@@ -1,5 +1,822 @@
 {
   "active": true,
+  "activeVersion": {
+    "authors": "system migration",
+    "connections": {
+      "Common filter": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "채팅방에 메시지 보내기",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "내 계정으로 이메일 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "HHMM": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Common filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "채팅방에 메시지 보내기",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "내 계정으로 이메일 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Rafikiresearch": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "rifiki filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "systrader79의 왕초보를 위한 주식 투자",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "태웅이 티스토리",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "호구빵명 티스토리",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "BNL Law (미국 진출 기업, 스타트업 기업들을 위한 법률 가이드)",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "Test",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Steady Study 배휘동님": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Common filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "bok filter": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "채팅방에 메시지 보내기",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "내 계정으로 이메일 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "rifiki filter": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "채팅방에 메시지 보내기",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "내 계정으로 이메일 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "내 계정으로 이메일 보내기": {
+        "main": [
+          []
+        ]
+      },
+      "송종식의 IT와 가치투자 이야기": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "송종식의 IT와 가치투자 이야기 filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "송종식의 IT와 가치투자 이야기 filter": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "채팅방에 메시지 보내기",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "내 계정으로 이메일 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "씨앗노래": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Common filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "유시민씨 것만 필터링": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "If",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "유시민씨 민들레 칼럼": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "유시민씨 것만 필터링",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "정하성 AIstar 미래를 밝히는 AI 인사이트": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Common filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "채팅방에 메시지 보내기": {
+        "main": [
+          []
+        ]
+      },
+      "테스트 노드": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Common filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "한국은행 블로그": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "bok filter",
+              "type": "main"
+            }
+          ]
+        ]
+      }
+    },
+    "description": null,
+    "name": null,
+    "nodes": [
+      {
+        "id": "0664ed86-ebb1-4e0b-88b9-2a0e4a90904e",
+        "name": "rifiki filter",
+        "parameters": {
+          "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\n\n// author 처리 (없을 경우 기본값)\nlet author = $json.author;\nif (!author || author === 'noreply@blogger.com (Unknown)') {\n  author = 'Rafiki Research (Global Macro Research)';\n}\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        },
+        "position": [
+          -1088,
+          -224
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "8e51c297-b643-489f-9ebc-6b9097e7ff61",
+        "name": "bok filter",
+        "parameters": {
+          "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\n\n// author 처리 (없을 경우 기본값)\nlet author = $json.author;\nif (!author || author === 'noreply@blogger.com (Unknown)') {\n  author = '한국은행(BOK)';\n}\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        },
+        "position": [
+          -1104,
+          64
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "ab41ce34-172b-4c70-a028-313df5e2eca2",
+        "name": "송종식의 IT와 가치투자 이야기 filter",
+        "parameters": {
+          "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\n\n// author 처리 (없을 경우 기본값)\nlet author = $json.author;\nif (!author || author === 'noreply@blogger.com (Unknown)') {\n  author = '송종식의 IT와 가치투자 이야기';\n}\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        },
+        "position": [
+          -1136,
+          224
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "14f2f6db-5949-49d2-8369-2bbda6828bca",
+        "name": "유시민씨 민들레 칼럼",
+        "parameters": {
+          "feedUrl": "https://www.mindlenews.com/rss/S1N8.xml",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          528
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "488be80c-4dd5-4563-89e5-14ce49985841",
+        "name": "유시민씨 것만 필터링",
+        "parameters": {
+          "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\nconst author = $json.author;\nconst creator = $json.creator;\n\nreturn [\n  {\n    json: {\n      title,\n      creator,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        },
+        "position": [
+          -1120,
+          400
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "fbc026e0-9a41-4418-800f-b8f4398aab66",
+        "name": "If",
+        "parameters": {
+          "conditions": {
+            "combinator": "or",
+            "conditions": [
+              {
+                "id": "4a2d5488-c6fc-4483-834b-abdba7c4817e",
+                "leftValue": "={{ $json.author }}",
+                "operator": {
+                  "operation": "contains",
+                  "type": "string"
+                },
+                "rightValue": "유시민"
+              },
+              {
+                "id": "1f3a47e9-79a0-42c8-b91e-2a4ca9ddad2d",
+                "leftValue": "={{ $json.creator }}",
+                "operator": {
+                  "operation": "contains",
+                  "type": "string"
+                },
+                "rightValue": "유시민"
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            }
+          },
+          "options": {}
+        },
+        "position": [
+          -880,
+          272
+        ],
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2
+      },
+      {
+        "id": "250e4acd-196e-4bbd-bd63-3279970b3e20",
+        "name": "Common filter",
+        "parameters": {
+          "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\nconst author = $json.author || $json.creator;\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        },
+        "position": [
+          -1088,
+          -80
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "cowGZHgER0ROs767",
+            "name": "Gmail account"
+          }
+        },
+        "disabled": true,
+        "id": "12ce69bd-39fd-43b8-820a-d36f426c943f",
+        "name": "내 계정으로 이메일 보내기",
+        "parameters": {
+          "message": "=<a href=\"{{ $json.link }}\">{{ $json.title }}</a><br>",
+          "options": {},
+          "sendTo": "dnr2144@gmail.com, aipooh8882@naver.com",
+          "subject": "=({{ $json.pubDate }}) {{ $json.author }} - {{ $json.title }}"
+        },
+        "position": [
+          -544,
+          -224
+        ],
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "webhookId": "4716a171-9877-4ebf-9d5d-4e6c124a7c2f"
+      },
+      {
+        "id": "f5169dc4-ddab-4018-8d5f-03c6b61fc7e3",
+        "name": "한국은행 블로그",
+        "parameters": {
+          "feedUrl": "https://www.bok.or.kr/portal/bbs/B0000347/news.rss?menuNo=201106",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          208
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "a5d08a76-18fb-4bf5-90a7-816f1ffefbfa",
+        "name": "송종식의 IT와 가치투자 이야기",
+        "parameters": {
+          "feedUrl": "https://investor-js.blogspot.com/feeds/posts/default?alt=rss",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          368
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "50bceb61-4c32-4ab6-b4bb-f23e8541f180",
+        "name": "정하성 AIstar 미래를 밝히는 AI 인사이트",
+        "parameters": {
+          "feedUrl": "https://haseong.github.io/feed.xml",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          64
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "9c95b347-0dde-4c2d-bbc8-7b049348e802",
+        "name": "HHMM",
+        "parameters": {
+          "feedUrl": "https://hugin00munin.blogspot.com/feeds/posts/default",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          -80
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "fa026b91-4958-4792-be43-a8f7da1e7ace",
+        "name": "Rafikiresearch",
+        "parameters": {
+          "feedUrl": "https://rafikiresearch.blogspot.com/feeds/posts/default?alt=rss",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyX",
+                "unit": "minutes",
+                "value": 30
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          -240
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "disabled": true,
+        "id": "98697b49-e808-4f98-9769-6f26beff95ae",
+        "name": "테스트 노드",
+        "parameters": {
+          "feedUrl": "https://rss.blog.naver.com/kkangchicken",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyMinute"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          688
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "credentials": {
+          "telegramApi": {
+            "id": "ejLmvh6eni9woYLp",
+            "name": "Telegram account"
+          }
+        },
+        "id": "0ef3533d-a158-4f2d-9fd5-2ff24dd3eb61",
+        "name": "채팅방에 메시지 보내기",
+        "parameters": {
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          },
+          "chatId": "5111438653",
+          "text": "=<strong>🆕🆕🆕  새 글이 올라왔어요! 🆕🆕🆕</strong>\n<a href=\"{{$json.link}}\"> {{ $json.title }} by {{$json.author}}</a>\n\n({{ $json.pubDate }})"
+        },
+        "position": [
+          -480,
+          0
+        ],
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "webhookId": "99af6d42-48fd-4438-88dd-9797e7a3c0b2"
+      },
+      {
+        "id": "73f3b8ec-6b60-499b-b8f6-74d140f1316a",
+        "name": "Schedule Trigger",
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "minutes",
+                "minutesInterval": 30
+              }
+            ]
+          }
+        },
+        "position": [
+          -1584,
+          -960
+        ],
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2
+      },
+      {
+        "id": "b33bc9b4-bfb8-4019-8446-207aab17ec46",
+        "name": "호구빵명 티스토리",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS 서브 모듈",
+            "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://hoppang-chassis.tistory.com/rss"
+            }
+          }
+        },
+        "position": [
+          -1136,
+          -784
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
+      },
+      {
+        "id": "037043c0-0f67-4130-878a-12f5477b513c",
+        "name": "태웅이 티스토리",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS watcher module",
+            "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://ydontustudy.tistory.com/rss"
+            }
+          }
+        },
+        "position": [
+          -1136,
+          -960
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
+      },
+      {
+        "disabled": true,
+        "id": "c87b7a10-7833-4e22-9ad3-e592128664a9",
+        "name": "BNL Law (미국 진출 기업, 스타트업 기업들을 위한 법률 가이드)",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS watcher module",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://kunchang.tistory.com/rss"
+            }
+          }
+        },
+        "position": [
+          -1136,
+          -592
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
+      },
+      {
+        "id": "3c55610c-41b8-4f3c-82c2-2ef9e4e32932",
+        "name": "systrader79의 왕초보를 위한 주식 투자",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS watcher module",
+            "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://stock79.tistory.com/rss"
+            }
+          }
+        },
+        "position": [
+          -1136,
+          -1136
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
+      },
+      {
+        "disabled": true,
+        "id": "75843841-619a-4a01-ac06-139b1436a94c",
+        "name": "Test",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS watcher module",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://dnr2144.tistory.com/rss"
+            }
+          }
+        },
+        "position": [
+          -1136,
+          -1280
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
+      },
+      {
+        "disabled": true,
+        "id": "bb599ba9-2626-4f1f-b4a9-da1df42ecd7b",
+        "name": "Steady Study 배휘동님",
+        "parameters": {
+          "feedUrl": "https://www.stdy.blog/rss/",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          880
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "351ecb40-109c-497e-968b-74b9513fca29",
+        "name": "씨앗노래",
+        "parameters": {
+          "feedUrl": "https://seedsong.pe.kr/feed",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          }
+        },
+        "position": [
+          -1520,
+          1056
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      }
+    ],
+    "workflowId": "PC267eYSDfFtQfTf"
+  },
+  "activeVersionId": "323f6c9e-ebed-4919-90a6-6ee4d3477e60",
   "connections": {
     "Common filter": {
       "main": [
