@@ -1,5 +1,642 @@
 {
   "active": true,
+  "activeVersion": {
+    "authors": "system migration",
+    "connections": {
+      "'강성욱'씨가 한 채팅 제외": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Ask to 'what_are_you_doing' label",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "field formatting",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Ask to 'what_are_you_doing' label": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "if 'what_are_you_doing' is true",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Formatting": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Store chat data",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "Google Gemini Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "index": 0,
+              "node": "AI Agent",
+              "type": "ai_languageModel"
+            }
+          ]
+        ]
+      },
+      "Only text": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "명언 추가 필터링",
+              "type": "main"
+            }
+          ],
+          []
+        ]
+      },
+      "Redis Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "index": 0,
+              "node": "AI Agent",
+              "type": "ai_memory"
+            }
+          ]
+        ]
+      },
+      "Telegram Trigger": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "Only text",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "field formatting": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "답변 보내기",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "if 'what_are_you_doing' is true": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "봇 응답",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "if 챗봇에게 메시지를 보내는 거면": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "AI Agent",
+              "type": "main"
+            }
+          ],
+          [
+            {
+              "index": 0,
+              "node": "'강성욱'씨가 한 채팅 제외",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "답변 보내기": {
+        "main": [
+          []
+        ]
+      },
+      "명언 추가 필터링": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "트리거 접두사 제거",
+              "type": "main"
+            }
+          ],
+          [
+            {
+              "index": 0,
+              "node": "챗봇에게 하는 메시지인지 확인",
+              "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "Formatting",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "봇 응답": {
+        "main": [
+          []
+        ]
+      },
+      "챗봇에게 하는 메시지인지 확인": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "if 챗봇에게 메시지를 보내는 거면",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "트리거 접두사 제거": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "명언(Quotes) 추가",
+              "type": "main"
+            }
+          ]
+        ]
+      }
+    },
+    "description": null,
+    "name": null,
+    "nodes": [
+      {
+        "credentials": {
+          "telegramApi": {
+            "id": "ejLmvh6eni9woYLp",
+            "name": "Telegram account"
+          }
+        },
+        "id": "d06028ca-9a54-4aaa-b451-161f81870e5b",
+        "name": "Telegram Trigger",
+        "parameters": {
+          "additionalFields": {
+            "chatIds": "-1002508804174, -1002759947428, 5111438653",
+            "download": false
+          },
+          "updates": [
+            "message"
+          ]
+        },
+        "position": [
+          -880,
+          -320
+        ],
+        "type": "n8n-nodes-base.telegramTrigger",
+        "typeVersion": 1.2,
+        "webhookId": "a596c835-1bf5-4ef4-8c81-09522539602a"
+      },
+      {
+        "id": "38888bce-2d85-4479-952b-b39119e3ba8e",
+        "name": "AI Agent",
+        "parameters": {
+          "options": {},
+          "promptType": "define",
+          "text": "=질문: {{ $json.text }}\n___\n\n위 질문에 대한 답변을 제공해줘. 답변에 여타 시작 문구 혹은 마무리 문구 같은 거 추가하지 말고 오로지 질문에 대한 답변만 제공해줘? 뭐 이를테면, '정말 좋은 질문이에요. 답변을 드릴게요.' <- 이런 필요 없는 표현은 섞지 말라는 의미야. 그리고 텔레그램으로 보낼 거니까 텔레그램 마크다운이나 HTML 문법 때문에 메세지 송신이 안 되는 일은 없게 해줘."
+        },
+        "position": [
+          384,
+          -496
+        ],
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 2
+      },
+      {
+        "credentials": {
+          "googlePalmApi": {
+            "id": "V1AoxYk9nDVwiywA",
+            "name": "Google Gemini(PaLM) Api account"
+          }
+        },
+        "id": "ea7395e9-be36-45e1-9784-6924ddf21b56",
+        "name": "Google Gemini Chat Model",
+        "parameters": {
+          "options": {}
+        },
+        "position": [
+          384,
+          -304
+        ],
+        "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+        "typeVersion": 1
+      },
+      {
+        "credentials": {
+          "telegramApi": {
+            "id": "ejLmvh6eni9woYLp",
+            "name": "Telegram account"
+          }
+        },
+        "id": "f2c19967-a3ba-4dca-b462-45ae5d1a32e8",
+        "name": "답변 보내기",
+        "parameters": {
+          "additionalFields": {
+            "appendAttribution": false
+          },
+          "chatId": "={{ $('챗봇에게 하는 메시지인지 확인').item.json.chat_id }}",
+          "text": "={{ $json.text }}"
+        },
+        "position": [
+          1232,
+          -400
+        ],
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "webhookId": "083e8e23-1e57-4dcb-88f8-8bf06cdee134"
+      },
+      {
+        "credentials": {
+          "redis": {
+            "id": "wUQMer6jnoB9wK9u",
+            "name": "Redis account"
+          }
+        },
+        "id": "bd758f81-bf95-48cc-8115-b550fb460869",
+        "name": "Redis Chat Memory",
+        "parameters": {
+          "contextWindowLength": 10,
+          "sessionIdType": "customKey",
+          "sessionKey": "={{'telegram_session_' + $json.chat_id}}"
+        },
+        "position": [
+          512,
+          -304
+        ],
+        "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+        "typeVersion": 1.5
+      },
+      {
+        "id": "106cc41a-8452-49cf-897e-8314d49a48e6",
+        "name": "챗봇에게 하는 메시지인지 확인",
+        "parameters": {
+          "jsCode": "const item = $input.first();\nconst msg = item.json.message;\nconst text = msg?.text;\nconst chatId = msg?.chat?.id;\nconst username = msg?.chat?.username;\n\nif (!text || !chatId) {\n  return {};\n}\n\nconst isAsk = text.startsWith('/ask');\nconst cleanedText = isAsk ? text.replace(/^\\/ask\\s*/, '') : text;\n\nreturn {\n  json: {\n    username: username,\n    text: cleanedText,\n    chat_id: chatId,\n    is_ask: isAsk\n  }\n};\n"
+        },
+        "position": [
+          -192,
+          -320
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "e4ff98d3-7eb0-486e-a7e6-a197ffe9583f",
+        "name": "명언 추가 필터링",
+        "parameters": {
+          "conditions": {
+            "combinator": "or",
+            "conditions": [
+              {
+                "id": "910f8433-fbc7-4dbd-b9cf-aa53de66885a",
+                "leftValue": "={{$json.message.text}}",
+                "operator": {
+                  "operation": "startsWith",
+                  "type": "string"
+                },
+                "rightValue": "/노트"
+              },
+              {
+                "id": "2fc2037b-231e-4bd7-910a-3f606a6a5672",
+                "leftValue": "={{$json.message.text}}",
+                "operator": {
+                  "operation": "startsWith",
+                  "type": "string"
+                },
+                "rightValue": "/note"
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            }
+          },
+          "options": {}
+        },
+        "position": [
+          -480,
+          -336
+        ],
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2
+      },
+      {
+        "credentials": {
+          "postgres": {
+            "id": "mLiW4HU9dBk6AOm0",
+            "name": "Postgres account"
+          }
+        },
+        "id": "05b12bec-cdce-4c4e-8a04-ec237058dd2f",
+        "name": "명언(Quotes) 추가",
+        "parameters": {
+          "operation": "executeQuery",
+          "options": {},
+          "query": "insert into knowledge_bits (content, SOURCE) values ('{{$json.cleanedText}}', null);"
+        },
+        "position": [
+          192,
+          -640
+        ],
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6
+      },
+      {
+        "id": "c0b41045-1f8d-4e96-8c6f-0094c3aae405",
+        "name": "트리거 접두사 제거",
+        "parameters": {
+          "jsCode": "for (const item of $input.all()) {\n  const text = item.json.message.text || '';\n\n  // '/quotes', '/노트' 등 접두사 제거\n  const cleanedText = text.replace(/^\\/(quotes|노트)\\s*/, '').trim();\n\n  // Postgres escape 처리 (작은따옴표를 '' 로)\n  const escapedText = cleanedText.replace(/'/g, \"''\");\n\n  item.json.cleanedText = escapedText;\n}\n\nreturn $input.all();\n"
+        },
+        "position": [
+          -80,
+          -496
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "id": "c20d4aa6-6225-4907-bd49-83e485689be8",
+        "name": "if 챗봇에게 메시지를 보내는 거면",
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "5ff490ab-91a0-44ac-bad8-8a28ae2ed99d",
+                "leftValue": "={{ $json.is_ask }}",
+                "operator": {
+                  "operation": "true",
+                  "singleValue": true,
+                  "type": "boolean"
+                },
+                "rightValue": ""
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            }
+          },
+          "options": {}
+        },
+        "position": [
+          -32,
+          -320
+        ],
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2
+      },
+      {
+        "id": "0e44a449-49a4-47ed-8436-32938495c6c7",
+        "name": "field formatting",
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a5a6ca52-93b5-4225-917f-752a1b8b1039",
+                "name": "text",
+                "type": "string",
+                "value": "={{ $json.output }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "position": [
+          752,
+          -496
+        ],
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4
+      },
+      {
+        "id": "b2706fe3-7ac8-4826-8985-47dffcc67a76",
+        "name": "Store chat data",
+        "parameters": {
+          "bodyParameters": {
+            "parameters": [
+              {}
+            ]
+          },
+          "jsonBody": "={\n  \"message_id\": {{ $json.message_id }},\n  \"chat_id\": {{ $json.chat_id}},\n  \"is_bot\": {{$json.is_bot}},\n  \"nickname\": \"{{$json.first_name || ''}}\",\n  \"username\": \"{{$json.username || ''}}\",\n  \"text\": {{ $json.text }},\n  \"timestamp\": {{$json.timestamp}}\n}\n",
+          "method": "POST",
+          "options": {},
+          "sendBody": true,
+          "specifyBody": "=json",
+          "url": "http://chatting-embedding:5001/embed"
+        },
+        "position": [
+          0,
+          -96
+        ],
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2
+      },
+      {
+        "disabled": true,
+        "id": "18450b1f-df90-4512-8de7-f291ef1abe4f",
+        "name": "Ask to 'what_are_you_doing' label",
+        "parameters": {
+          "jsonBody": "={\n  \"label\": \"what_are_you_doing\",\n  \"text\": \"{{$json.text.replace(/\"/g, '\\\\\"').replace(/\\n/g, '\\\\n')}}\"\n} ",
+          "method": "POST",
+          "options": {},
+          "sendBody": true,
+          "specifyBody": "json",
+          "url": "http://chatting-embedding:5001/seed-matches"
+        },
+        "position": [
+          528,
+          -80
+        ],
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2
+      },
+      {
+        "id": "300d939b-2d4d-4c25-a088-71f94f057566",
+        "name": "Only text",
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "2cc576f5-5156-4ccc-9d46-7dccc1c49734",
+                "leftValue": "={{ $json.document }}",
+                "operator": {
+                  "operation": "notExists",
+                  "singleValue": true,
+                  "type": "boolean"
+                },
+                "rightValue": ""
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            }
+          },
+          "options": {}
+        },
+        "position": [
+          -704,
+          -320
+        ],
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2
+      },
+      {
+        "disabled": true,
+        "id": "0be6cc3c-ae06-4f8f-a31c-545513297449",
+        "name": "if 'what_are_you_doing' is true",
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "cd1e60d6-2d60-4b65-a847-879ae5ad22a6",
+                "leftValue": "={{ $json.block }}",
+                "operator": {
+                  "operation": "true",
+                  "singleValue": true,
+                  "type": "boolean"
+                },
+                "rightValue": ""
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            }
+          },
+          "options": {}
+        },
+        "position": [
+          688,
+          -80
+        ],
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2
+      },
+      {
+        "disabled": true,
+        "id": "3623cd09-44ad-411e-861b-b17a405bad42",
+        "name": "봇 응답",
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1d8ad173-8074-4dbf-9318-d27bdd65c82f",
+                "name": "text",
+                "type": "string",
+                "value": "저희 주인님께 뭐하냐는 유의 질문은 삼가해주세요! 실례되는 행동입니다!"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "position": [
+          896,
+          -176
+        ],
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4
+      },
+      {
+        "id": "3adbfa7b-3126-449b-95aa-9040d6ef6615",
+        "name": "Formatting",
+        "parameters": {
+          "jsCode": "const obj = $input.first().json;\n\nreturn [\n  {\n    json: {\n      message_id: obj.message.message_id,\n      chat_id: obj.message.chat.id,\n      is_bot: obj.message.from.is_bot,\n      nickname: obj.message.from.first_name || '',\n      username: obj.message.chat.username || '',\n      text: JSON.stringify(obj.message.text),\n      timestamp: obj.message.date\n    }\n  }\n];"
+        },
+        "position": [
+          -192,
+          -96
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
+      },
+      {
+        "disabled": true,
+        "id": "3430cb47-94c1-43c9-92d3-f3f19660bc70",
+        "name": "'강성욱'씨가 한 채팅 제외",
+        "parameters": {
+          "conditions": {
+            "combinator": "or",
+            "conditions": [
+              {
+                "id": "c00bd68a-46ce-4e25-b05d-3f3f84dddc21",
+                "leftValue": "={{ $json.chat_id }}",
+                "operator": {
+                  "operation": "equals",
+                  "type": "number"
+                },
+                "rightValue": 5111438653
+              },
+              {
+                "id": "8ca488e6-807f-4132-82ca-b46a52b0ce23",
+                "leftValue": "={{ $('명언 추가 필터링').item.json.message.from.username }}",
+                "operator": {
+                  "operation": "notEquals",
+                  "type": "string"
+                },
+                "rightValue": "realSeongUkKang"
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            }
+          },
+          "options": {}
+        },
+        "position": [
+          272,
+          -160
+        ],
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2
+      }
+    ],
+    "workflowId": "qmXVBcvwPYwornXp"
+  },
+  "activeVersionId": "68d4194c-6507-400b-8afe-8f5d0f708905",
   "connections": {
     "'강성욱'씨가 한 채팅 제외": {
       "main": [
