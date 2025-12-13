@@ -1,7 +1,7 @@
 {
   "active": true,
   "activeVersion": {
-    "authors": "system migration",
+    "authors": "SEONGUK KANG",
     "connections": {
       "Common filter": {
         "main": [
@@ -9,11 +9,6 @@
             {
               "index": 0,
               "node": "채팅방에 메시지 보내기",
-              "type": "main"
-            },
-            {
-              "index": 0,
-              "node": "내 계정으로 이메일 보내기",
               "type": "main"
             }
           ]
@@ -36,11 +31,6 @@
             {
               "index": 0,
               "node": "채팅방에 메시지 보내기",
-              "type": "main"
-            },
-            {
-              "index": 0,
-              "node": "내 계정으로 이메일 보내기",
               "type": "main"
             }
           ]
@@ -84,6 +74,11 @@
               "index": 0,
               "node": "Test",
               "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "서교연 웹진 인-무브",
+              "type": "main"
             }
           ]
         ]
@@ -106,11 +101,6 @@
               "index": 0,
               "node": "채팅방에 메시지 보내기",
               "type": "main"
-            },
-            {
-              "index": 0,
-              "node": "내 계정으로 이메일 보내기",
-              "type": "main"
             }
           ]
         ]
@@ -121,11 +111,6 @@
             {
               "index": 0,
               "node": "채팅방에 메시지 보내기",
-              "type": "main"
-            },
-            {
-              "index": 0,
-              "node": "내 계정으로 이메일 보내기",
               "type": "main"
             }
           ]
@@ -154,11 +139,6 @@
               "index": 0,
               "node": "채팅방에 메시지 보내기",
               "type": "main"
-            },
-            {
-              "index": 0,
-              "node": "내 계정으로 이메일 보내기",
-              "type": "main"
             }
           ]
         ]
@@ -169,6 +149,28 @@
             {
               "index": 0,
               "node": "Common filter",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "양영빈 기자 - 연준와처": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "양영빈 기자가 쓴 기사만 필터링",
+              "type": "main"
+            }
+          ]
+        ]
+      },
+      "양영빈 기자가 쓴 기사만 필터링": {
+        "main": [
+          [
+            {
+              "index": 0,
+              "node": "채팅방에 메시지 보내기",
               "type": "main"
             }
           ]
@@ -382,8 +384,8 @@
           "subject": "=({{ $json.pubDate }}) {{ $json.author }} - {{ $json.title }}"
         },
         "position": [
-          -544,
-          -224
+          -432,
+          -352
         ],
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.1,
@@ -551,8 +553,8 @@
           }
         },
         "position": [
-          -1584,
-          -960
+          -1600,
+          -1232
         ],
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.2
@@ -594,8 +596,8 @@
           }
         },
         "position": [
-          -1136,
-          -784
+          -1152,
+          -1056
         ],
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.2
@@ -637,8 +639,8 @@
           }
         },
         "position": [
-          -1136,
-          -960
+          -1152,
+          -1232
         ],
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.2
@@ -680,8 +682,8 @@
           }
         },
         "position": [
-          -1136,
-          -592
+          -1152,
+          -864
         ],
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.2
@@ -723,8 +725,8 @@
           }
         },
         "position": [
-          -1136,
-          -1136
+          -1152,
+          -1408
         ],
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.2
@@ -766,8 +768,8 @@
           }
         },
         "position": [
-          -1136,
-          -1280
+          -1152,
+          -1552
         ],
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.2
@@ -807,16 +809,94 @@
           }
         },
         "position": [
-          -1520,
+          -1504,
           1056
         ],
         "type": "n8n-nodes-base.rssFeedReadTrigger",
         "typeVersion": 1
+      },
+      {
+        "id": "353df7a3-44e4-4d80-9537-baf8920635ee",
+        "name": "서교연 웹진 인-무브",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS 서브 모듈",
+            "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://en-movement.net/rss"
+            }
+          }
+        },
+        "position": [
+          -1152,
+          -672
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
+      },
+      {
+        "id": "8bf32e6f-d538-4361-9236-327a835c5df5",
+        "name": "양영빈 기자 - 연준와처",
+        "parameters": {
+          "feedUrl": "http://www.economy21.co.kr/rss/allArticle.xml",
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyX",
+                "unit": "minutes",
+                "value": 30
+              }
+            ]
+          }
+        },
+        "position": [
+          -1504,
+          -400
+        ],
+        "type": "n8n-nodes-base.rssFeedReadTrigger",
+        "typeVersion": 1
+      },
+      {
+        "id": "c2f7a37b-1293-4390-88ac-134b9c0da1d8",
+        "name": "양영빈 기자가 쓴 기사만 필터링",
+        "parameters": {
+          "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\nconst author = $json.author || '';\n\n// 양영빈 기자가 아니면 빈 배열 반환 (다음 노드로 전달 안 함)\nif (author !== '양영빈 기자') {\n  return [];\n}\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+        },
+        "position": [
+          -1104,
+          -384
+        ],
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2
       }
     ],
     "workflowId": "PC267eYSDfFtQfTf"
   },
-  "activeVersionId": "323f6c9e-ebed-4919-90a6-6ee4d3477e60",
+  "activeVersionId": "ce531722-db69-4b58-8eac-683eb311f385",
   "connections": {
     "Common filter": {
       "main": [
@@ -824,11 +904,6 @@
           {
             "index": 0,
             "node": "채팅방에 메시지 보내기",
-            "type": "main"
-          },
-          {
-            "index": 0,
-            "node": "내 계정으로 이메일 보내기",
             "type": "main"
           }
         ]
@@ -851,11 +926,6 @@
           {
             "index": 0,
             "node": "채팅방에 메시지 보내기",
-            "type": "main"
-          },
-          {
-            "index": 0,
-            "node": "내 계정으로 이메일 보내기",
             "type": "main"
           }
         ]
@@ -899,6 +969,11 @@
             "index": 0,
             "node": "Test",
             "type": "main"
+          },
+          {
+            "index": 0,
+            "node": "서교연 웹진 인-무브",
+            "type": "main"
           }
         ]
       ]
@@ -921,11 +996,6 @@
             "index": 0,
             "node": "채팅방에 메시지 보내기",
             "type": "main"
-          },
-          {
-            "index": 0,
-            "node": "내 계정으로 이메일 보내기",
-            "type": "main"
           }
         ]
       ]
@@ -936,11 +1006,6 @@
           {
             "index": 0,
             "node": "채팅방에 메시지 보내기",
-            "type": "main"
-          },
-          {
-            "index": 0,
-            "node": "내 계정으로 이메일 보내기",
             "type": "main"
           }
         ]
@@ -969,11 +1034,6 @@
             "index": 0,
             "node": "채팅방에 메시지 보내기",
             "type": "main"
-          },
-          {
-            "index": 0,
-            "node": "내 계정으로 이메일 보내기",
-            "type": "main"
           }
         ]
       ]
@@ -984,6 +1044,28 @@
           {
             "index": 0,
             "node": "Common filter",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "양영빈 기자 - 연준와처": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "양영빈 기자가 쓴 기사만 필터링",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "양영빈 기자가 쓴 기사만 필터링": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "채팅방에 메시지 보내기",
             "type": "main"
           }
         ]
@@ -1198,8 +1280,8 @@
         "subject": "=({{ $json.pubDate }}) {{ $json.author }} - {{ $json.title }}"
       },
       "position": [
-        -544,
-        -224
+        -432,
+        -352
       ],
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
@@ -1367,8 +1449,8 @@
         }
       },
       "position": [
-        -1584,
-        -960
+        -1600,
+        -1232
       ],
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2
@@ -1410,8 +1492,8 @@
         }
       },
       "position": [
-        -1136,
-        -784
+        -1152,
+        -1056
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
@@ -1453,8 +1535,8 @@
         }
       },
       "position": [
-        -1136,
-        -960
+        -1152,
+        -1232
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
@@ -1496,8 +1578,8 @@
         }
       },
       "position": [
-        -1136,
-        -592
+        -1152,
+        -864
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
@@ -1539,8 +1621,8 @@
         }
       },
       "position": [
-        -1136,
-        -1136
+        -1152,
+        -1408
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
@@ -1582,8 +1664,8 @@
         }
       },
       "position": [
-        -1136,
-        -1280
+        -1152,
+        -1552
       ],
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2
@@ -1623,11 +1705,89 @@
         }
       },
       "position": [
-        -1520,
+        -1504,
         1056
       ],
       "type": "n8n-nodes-base.rssFeedReadTrigger",
       "typeVersion": 1
+    },
+    {
+      "id": "353df7a3-44e4-4d80-9537-baf8920635ee",
+      "name": "서교연 웹진 인-무브",
+      "parameters": {
+        "options": {},
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "RSS 서브 모듈",
+          "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+          "mode": "list",
+          "value": "P2rm5erg2xNyCmhT"
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "rssUrl"
+          ],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "rssUrl",
+              "id": "rssUrl",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "value": {
+            "rssUrl": "https://en-movement.net/rss"
+          }
+        }
+      },
+      "position": [
+        -1152,
+        -672
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2
+    },
+    {
+      "id": "8bf32e6f-d538-4361-9236-327a835c5df5",
+      "name": "양영빈 기자 - 연준와처",
+      "parameters": {
+        "feedUrl": "http://www.economy21.co.kr/rss/allArticle.xml",
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "minutes",
+              "value": 30
+            }
+          ]
+        }
+      },
+      "position": [
+        -1504,
+        -400
+      ],
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1
+    },
+    {
+      "id": "c2f7a37b-1293-4390-88ac-134b9c0da1d8",
+      "name": "양영빈 기자가 쓴 기사만 필터링",
+      "parameters": {
+        "jsCode": "// 기본 정보 추출\nconst title = $json.title.replace(/&/g, '&amp;');\nconst link = $json.link.replace(/&/g, '&amp;');\nconst pubDate = $json.pubDate || $json.isoDate;\nconst id = $json.guid || $json.id || 'NO_ID';\nconst author = $json.author || '';\n\n// 양영빈 기자가 아니면 빈 배열 반환 (다음 노드로 전달 안 함)\nif (author !== '양영빈 기자') {\n  return [];\n}\n\nreturn [\n  {\n    json: {\n      title,\n      link,\n      pubDate,\n      id,\n      author,\n    }\n  }\n];"
+      },
+      "position": [
+        -1104,
+        -384
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
     }
   ],
   "repo_name": "n8n-workflow-backup",
@@ -1644,5 +1804,5 @@
     }
   ],
   "tags": [],
-  "triggerCount": 8
+  "triggerCount": 9
 }
