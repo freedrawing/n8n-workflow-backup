@@ -79,6 +79,11 @@
               "index": 0,
               "node": "서교연 웹진 인-무브",
               "type": "main"
+            },
+            {
+              "index": 0,
+              "node": "행복한 수지아빠 - 오늘도 공부",
+              "type": "main"
             }
           ]
         ]
@@ -892,11 +897,54 @@
         ],
         "type": "n8n-nodes-base.code",
         "typeVersion": 2
+      },
+      {
+        "id": "2be64400-8c4a-479b-88bb-1d8c0c2ff064",
+        "name": "행복한 수지아빠 - 오늘도 공부",
+        "parameters": {
+          "options": {},
+          "workflowId": {
+            "__rl": true,
+            "cachedResultName": "RSS 서브 모듈",
+            "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+            "mode": "list",
+            "value": "P2rm5erg2xNyCmhT"
+          },
+          "workflowInputs": {
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true,
+            "mappingMode": "defineBelow",
+            "matchingColumns": [
+              "rssUrl"
+            ],
+            "schema": [
+              {
+                "canBeUsedToMatch": true,
+                "defaultMatch": false,
+                "display": true,
+                "displayName": "rssUrl",
+                "id": "rssUrl",
+                "removed": false,
+                "required": false,
+                "type": "string"
+              }
+            ],
+            "value": {
+              "rssUrl": "https://javaexpert.tistory.com/rss"
+            }
+          }
+        },
+        "position": [
+          -1152,
+          -1744
+        ],
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.2
       }
     ],
     "workflowId": "PC267eYSDfFtQfTf"
   },
-  "activeVersionId": "ce531722-db69-4b58-8eac-683eb311f385",
+  "activeVersionId": "ed995e06-d70c-4638-93b4-ab35292493c8",
   "connections": {
     "Common filter": {
       "main": [
@@ -973,6 +1021,11 @@
           {
             "index": 0,
             "node": "서교연 웹진 인-무브",
+            "type": "main"
+          },
+          {
+            "index": 0,
+            "node": "행복한 수지아빠 - 오늘도 공부",
             "type": "main"
           }
         ]
@@ -1134,7 +1187,7 @@
   },
   "id": "PC267eYSDfFtQfTf",
   "isArchived": false,
-  "name": "RSS 트래킹 스케줄러",
+  "name": "RSS 메인 스케줄러",
   "nodes": [
     {
       "id": "0664ed86-ebb1-4e0b-88b9-2a0e4a90904e",
@@ -1788,6 +1841,49 @@
       ],
       "type": "n8n-nodes-base.code",
       "typeVersion": 2
+    },
+    {
+      "id": "2be64400-8c4a-479b-88bb-1d8c0c2ff064",
+      "name": "행복한 수지아빠 - 오늘도 공부",
+      "parameters": {
+        "options": {},
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "RSS 서브 모듈",
+          "cachedResultUrl": "/workflow/P2rm5erg2xNyCmhT",
+          "mode": "list",
+          "value": "P2rm5erg2xNyCmhT"
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "rssUrl"
+          ],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "rssUrl",
+              "id": "rssUrl",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "value": {
+            "rssUrl": "https://javaexpert.tistory.com/rss"
+          }
+        }
+      },
+      "position": [
+        -1152,
+        -1744
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2
     }
   ],
   "repo_name": "n8n-workflow-backup",
